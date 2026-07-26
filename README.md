@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/bobvasic/promptguard/main/docs/assets/hero.svg" alt="PromptGuard" width="600" onerror="this.style.display='none'">
+  <img src="https://raw.githubusercontent.com/RaptorLabsHQ/promptguard/main/docs/assets/hero.svg" alt="PromptGuard" width="600">
 </p>
 
 <p align="center">
