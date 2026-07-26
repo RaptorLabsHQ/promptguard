@@ -23,7 +23,7 @@ import {
   Sparkles,
   Activity,
 } from "lucide-react";
-import AsciiWaveBackground from "@/AsciiWaveBackground";
+import PremiumAnimatedBackground from "@/PremiumAnimatedBackground";
 
 const Scan = base44.entities.Scan;
 const Finding = base44.entities.Finding;
@@ -263,7 +263,7 @@ function AuthForm({ onLogin }) {
   };
 
   return (
-    <div className="pg-app"><AsciiWaveBackground />
+    <div className="pg-app"><PremiumAnimatedBackground />
       <div className="pg-auth">
         <div className="w-full max-w-[420px] relative">
           {/* Identity */}
@@ -432,7 +432,7 @@ function Dashboard({ onNewScan, onViewScan, onLogout, onLogin, user }) {
   const lastScan = scans[0]?.created_date;
 
   return (
-    <div className="pg-app"><AsciiWaveBackground />
+    <div className="pg-app"><PremiumAnimatedBackground />
       <AppHeader subtitle="Security Dashboard">
         {user ? (
           <>
@@ -668,7 +668,7 @@ function NewScan({ onBack, onCreated }) {
   };
 
   return (
-    <div className="pg-app"><AsciiWaveBackground />
+    <div className="pg-app"><PremiumAnimatedBackground />
       <AppHeader onBack={onBack} subtitle="New scan" />
 
       <main className="pg-shell pg-shell--narrow pb-20 pt-6 sm:pt-8">
@@ -899,7 +899,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
 
   if (loading) {
     return (
-      <div className="pg-app"><AsciiWaveBackground />
+      <div className="pg-app"><PremiumAnimatedBackground />
         <div className="min-h-screen grid place-items-center gap-4">
           <div className="grid justify-items-center gap-4">
             <GuardMark className="w-12 h-12" />
@@ -914,7 +914,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
 
   if (!scan) {
     return (
-      <div className="pg-app"><AsciiWaveBackground />
+      <div className="pg-app"><PremiumAnimatedBackground />
         <AppHeader onBack={onBack} subtitle="Report" />
         <main className="pg-shell pg-shell--narrow py-16">
           <div className="pg-panel pg-empty">
@@ -940,7 +940,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
     total === 0 ? "clean" : SEVERITY_KEYS.find((k) => counts[k] > 0) || "low";
 
   return (
-    <div className="pg-app"><AsciiWaveBackground />
+    <div className="pg-app"><PremiumAnimatedBackground />
       <AppHeader onBack={onBack} subtitle={`Report · ${shortId(scan.id)}`}>
         <Button type="button" onClick={onNewScan} className="pg-btn pg-btn--primary pg-btn--sm">
           <Plus className="w-4 h-4" />
@@ -1171,7 +1171,7 @@ export default function App() {
 
   if (authLoading) {
     return (
-      <div className="pg-app"><AsciiWaveBackground />
+      <div className="pg-app"><PremiumAnimatedBackground />
         <div className="min-h-screen grid place-items-center">
           <div className="grid justify-items-center gap-4">
             <GuardMark className="w-14 h-14" />
@@ -1189,7 +1189,7 @@ export default function App() {
   if (showAuth) {
     return (
       <>
-        <div className="pg-app"><AsciiWaveBackground />
+        <div className="pg-app"><PremiumAnimatedBackground />
           <div className="fixed inset-0 z-50 bg-[#0f172a]/45 backdrop-blur-sm grid place-items-center p-4">
             <button
               type="button"
