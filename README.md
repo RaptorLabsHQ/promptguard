@@ -4,7 +4,7 @@
 
 <p align="center">
   <strong>Every prompt, inspected before it ships.</strong><br>
-  PromptGuard sweeps AI prompts and model output for injection, jailbreak, PII leakage, exfiltration and disclosure risk — with evidence and remediation for every finding.
+  PromptGuard scans AI prompts and model output for injection, jailbreak, PII leakage, exfiltration and disclosure risk — with evidence and remediation for every finding.
 </p>
 
 <p align="center">
