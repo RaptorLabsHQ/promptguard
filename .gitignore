@@ -27,3 +27,4 @@ skills-lock.json
 
 # Claude Code
 .claude/
+.preview-tmp/
