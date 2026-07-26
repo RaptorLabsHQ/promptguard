@@ -1,0 +1,29 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Environment
+.env
+.env.*
+*.local
+
+# Editor
+.vscode
+.idea
+.DS_Store
+*.swp
+
+# Base44 (contains app ID — do not commit)
+.app.json*
+
+# Base44 generated types
+.types/
+
+# AI agent skills (template files, not product code)
+.agents/
+skills-lock.json
+
+# Claude Code
+.claude/

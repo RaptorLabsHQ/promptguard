@@ -1,0 +1,52 @@
+{
+  "name": "Finding",
+  "type": "object",
+  "title": "Finding",
+  "description": "A security finding detected in a scan",
+  "properties": {
+    "scanId": {
+      "type": "string",
+      "description": "Reference to the parent scan"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "prompt_injection",
+        "pii_leak",
+        "data_exfiltration",
+        "jailbreak_attempt",
+        "bias_toxicity",
+        "info_disclosure"
+      ],
+      "description": "Category of the security finding"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["low", "medium", "high", "critical"],
+      "description": "Severity level"
+    },
+    "title": {
+      "type": "string",
+      "description": "Short finding title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Detailed explanation of the finding"
+    },
+    "evidence": {
+      "type": "string",
+      "description": "Quoted text from prompt/response"
+    },
+    "remediation": {
+      "type": "string",
+      "description": "Suggested fix or mitigation"
+    }
+  },
+  "required": ["scanId", "category", "severity", "title", "description"],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": true,
+    "delete": true
+  }
+}

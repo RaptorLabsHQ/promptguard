@@ -1,0 +1,39 @@
+{
+  "name": "Scan",
+  "type": "object",
+  "title": "Scan",
+  "description": "A prompt security scan submitted by a user",
+  "properties": {
+    "prompt": {
+      "type": "string",
+      "description": "The prompt text to analyze",
+      "minLength": 1
+    },
+    "response": {
+      "type": "string",
+      "description": "Optional LLM response to analyze alongside the prompt"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "analyzing", "complete", "error"],
+      "default": "pending",
+      "description": "Current scan status"
+    },
+    "findingCount": {
+      "type": "integer",
+      "default": 0,
+      "description": "Number of findings detected"
+    },
+    "errorMessage": {
+      "type": "string",
+      "description": "Error message if scan failed"
+    }
+  },
+  "required": ["prompt"],
+  "rls": {
+    "create": true,
+    "read": true,
+    "update": true,
+    "delete": true
+  }
+}
