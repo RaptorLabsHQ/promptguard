@@ -1023,26 +1023,47 @@ function ScanResults({ scanId, onBack, onNewScan }) {
   const [scan, setScan] = useState(null);
   const [findings, setFindings] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [retrying, setRetrying] = useState(0);
+  const maxRetries = 5;
 
   const fetchData = useCallback(async () => {
     try {
       const [scanData, findingsData] = await Promise.all([
-        Scan.list({ filter: { id: scanId } }),
+        Scan.get(scanId).catch(() => null),
         Finding.list({ filter: { scanId }, orderBy: "severity" }),
       ]);
-      setScan(scanData?.[0] || null);
+      
+      const found = scanData || null;
+      
+      // If scan not found and we have retries left, retry after delay
+      if (!found && retrying < maxRetries) {
+        const delay = Math.min(400 * Math.pow(1.5, retrying), 3000);
+        setTimeout(() => setRetrying((r) => r + 1), delay);
+        return;
+      }
+      
+      setScan(found);
       const sorted = (findingsData || []).sort(
         (a, b) => (SEVERITY_ORDER[a.severity] ?? 99) - (SEVERITY_ORDER[b.severity] ?? 99)
       );
       setFindings(sorted);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to fetch results:", err);
-    } finally {
+      if (retrying < maxRetries) {
+        const delay = Math.min(500 * Math.pow(1.5, retrying), 3000);
+        setTimeout(() => setRetrying((r) => r + 1), delay);
+        return;
+      }
       setLoading(false);
     }
-  }, [scanId]);
+  }, [scanId, retrying]);
+
+  // Reset retry counter when scanId changes
+  useEffect(() => { setRetrying(0); }, [scanId]);
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
 
     const unsubFindings = Finding.subscribe({ filter: { scanId } }, () => fetchData());

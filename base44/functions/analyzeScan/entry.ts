@@ -112,7 +112,6 @@ ${scan.prompt}
     // Call the AI integration for analysis
     const result = await db.integrations.Core.InvokeLLM({
       prompt: analysisPrompt,
-      model: "claude_fable_5",
       response_json_schema: FINDINGS_SCHEMA,
     });
 
