@@ -1,52 +1,99 @@
-# PremiumAnimatedBackground.jsx — REDESIGN BRIEF
+# Demo Attack Selector — Cinematic Judge Experience
 
-## What's wrong with the current version
-The current background has 45 luminous dots drifting on bezier paths + hexagonal grid + mesh anchors + caustics. It looks like an amateur particle system. Too many things happening. Too random. Too scattered.
+## Problem
+Judges review hundreds of submissions. They won't type their own prompts. The demo must be self-driving — click a floating element, see a blockbuster animation, get a complete prompt in the input, ready to scan. No typing required.
 
-## What we need instead
-ONE unified, architectural visual concept. Subtle. Intentional. Premium.
+## Visual Concept
 
-Think: the background of a $10,000/mo enterprise security SaaS. Something you'd see behind a Stripe dashboard, a Linear project page, or an Apple product launch. NOT a particle toy.
+### Step 0 — Floating Trigger
+A prominent frosted-glass floating button at the top of the New Scan page, above the input:
+"TRY A DEMO ATTACK" with a subtle pulsing glow ring around it. Immediately visible on page load.
 
-## VISUAL CONCEPT: Atmospheric Gradient Flow
+### Step 1 — Cloud Cards Fly In
+Click the trigger → 6 frosted glass cards animate in from the sides with staggered spring entrance (staggerChildren: 0.08). Each card shows:
+- Category icon (shield/alert/lock/link/code/eye from lucide-react)
+- Category name (Prompt Injection, PII Leak, etc.)
+- Severity badge (Critical/High/Medium)
+- Brief description (10-15 words)
+- Subtle hover glow
 
-A single, unified system: slow-moving atmospheric gradient fields that create depth and mood. No particles. No dots. No random elements.
+Cards float with gentle idle animation (subtle Y-axis oscillation, different phase per card).
 
-SPECIFICALLY:
-- 3-5 large, soft gradient orbs (300-600px radius) that drift VERY slowly across the canvas
-- Each orb has a soft radial gradient in navy blue tones (#1e3a5f, #2563eb, #3b82f6, #60a5fa)
-- Opacity: 0.03 to 0.08 — barely visible, atmospheric
-- The orbs overlap and blend, creating organic color fields like clouds or smoke
-- A subtle diagonal light sweep occasionally passes across (like a very faint glass reflection)
-- Optional: VERY subtle geometric grid lines (hairline, 0.03 opacity) that connect the orbs like a constellation, slowly morphing
+### Step 2 — Card Click → Character Rain
+User clicks a card → THE MAGIC HAPPENS:
 
-The feeling: standing inside a premium architectural space at dawn. Soft atmospheric light. Calm. Professional. Not busy. Not "cool hacker." Pure enterprise elegance.
+1. The card glows bright for 200ms
+2. The prompt text "shatters" — each character becomes a glowing blue particle
+3. Characters cascade down the screen in a beautiful rain pattern
+4. Characters flow into the textarea input field
+5. As each character "lands," it appears in the textarea with a subtle glow
+6. The textarea shows a typewriter-like construction of the full prompt
+7. Total animation: ~1.5 seconds
 
-## TECHNICAL REQUIREMENTS
-- Canvas-based, requestAnimationFrame
-- Fixed position, z-index: 0, pointer-events: none
-- Precomputed radial gradients or use canvas createRadialGradient
-- All motion sinusoidal, very slow (one full drift cycle = 30-60 seconds)
-- Colors: navy (#1e3a5f), blue (#2563eb), light blue (#3b82f6) at 0.02-0.08 alpha
-- Dark mode: slightly higher opacity on dark backgrounds
-- Self-contained React component, "use client", export default
-- File: src/PremiumAnimatedBackground.jsx
+### Step 3 — Ready to Scan
+After the character rain completes, the textarea contains the complete demo prompt with all special characters. The "Analyze Prompt" button pulses briefly to draw attention. User clicks it → scan runs.
 
-## WHAT TO AVOID
-- NO particles or dots
-- NO hex grids or repeating patterns
-- NO random generation
-- NO ASCII or code characters
-- NO "hacker" or "cyber" aesthetic
-- NO busy animation
-- NO fast motion
-- NOTHING that looks like a screensaver from 2005
+## Technical Implementation
 
-## QUALITY BAR
-If a visitor notices the background within the first 5 seconds, it's too busy.
-If a visitor has been on the page for 30 seconds and suddenly notices there's a beautiful atmospheric depth behind the UI, that's perfect.
+### Library: framer-motion (npm install framer-motion)
 
-## PRODUCTION
-- Build: `npm run build` — MUST PASS
-- Component placed inside `<div className="pg-app">` as first child in 8 locations in App.jsx
-- Already imported as `import PremiumAnimatedBackground from "@/PremiumAnimatedBackground"`
+### Component: DemoAttackSelector
+Renders in the NewScan page, positioned above the textarea.
+
+```jsx
+<AnimatePresence>
+  {step === 'trigger' && <FloatingTrigger onClick={open} />}
+  {step === 'cards' && (
+    <CloudCardGrid>
+      {SAMPLES.map((sample, i) => (
+        <CloudCard 
+          key={sample.id}
+          sample={sample}
+          index={i}
+          onClick={(e) => triggerCharacterRain(sample, e)}
+        />
+      ))}
+    </CloudCardGrid>
+  )}
+</AnimatePresence>
+```
+
+### Character Rain Animation
+Use framer-motion with:
+- `motion.div` for each character with `initial`, `animate`, `exit`
+- Characters start at card position, end at textarea position
+- `transition={{ type: "spring", stiffness: 200, damping: 20, delay: i * 0.02 }}`
+- Staggered delays (0.02s per character)
+
+Alternative approach if position tracking is too complex:
+- Canvas overlay creates particle burst from card
+- Particles flow in a curve toward the textarea
+- Textarea shows characters appearing one by one with typewriter + glow effect
+- canvas particles dissolve as characters "arrive" in the textarea
+
+### Styling
+- Frosted glass cards: `backdrop-blur-xl bg-white/80 border border-white/20 shadow-xl`
+- Floating button: `backdrop-blur-md bg-navy/90 text-white rounded-full`
+- Character rain particles: `text-[#2563eb] font-mono` glowing blue
+- Cards: rounded-2xl, subtle navy border, hover: shadow-2xl hover:-translate-y-1
+
+## Integration
+- Install framer-motion: `npm install framer-motion`
+- Import in App.jsx: `import { motion, AnimatePresence } from "framer-motion"`
+- Add DemoAttackSelector component inside the NewScan view, above the textarea
+- The component receives `onSelectPrompt(text)` callback to populate the textarea
+- Remove the existing "Try an example" section (replaced by this)
+
+## Visual Quality
+- Every motion uses spring physics (no linear/bezier)
+- Staggered children for entrance
+- Hover states with subtle glow (box-shadow with brand blue)
+- Cards bounce slightly when they appear
+- The character rain must look MAGICAL — not like a bug or glitch
+- Dark enough to be visible against the light background
+
+## File Changes
+1. Install framer-motion
+2. Create src/components/DemoAttackSelector.jsx
+3. Modify src/App.jsx: import DemoAttackSelector, integrate into NewScan section, remove old "Try an example" section
+4. Build: `npm run build` MUST pass

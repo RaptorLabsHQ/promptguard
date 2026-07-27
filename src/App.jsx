@@ -19,11 +19,10 @@ import {
   FileText,
   MessageSquare,
   Lightbulb,
-  CornerDownLeft,
-  Sparkles,
   Activity,
 } from "lucide-react";
 import PremiumAnimatedBackground from "@/PremiumAnimatedBackground";
+import DemoAttackSelector from "@/components/DemoAttackSelector";
 
 const Scan = base44.entities.Scan;
 const Finding = base44.entities.Finding;
@@ -765,37 +764,17 @@ function NewScan({ onBack, onCreated }) {
           </Button>
         </form>
 
-        {/* Examples — one per detection category */}
-        <section className="mt-12">
-          <SectionHead label="Try an example">
-            <span className="pg-chip">
-              <Sparkles className="w-3 h-3" aria-hidden="true" />
-              Click to load
-            </span>
-          </SectionHead>
-
-          <div className="pg-samples">
-            {SAMPLES.map((sample) => (
-              <button
-                key={sample.id}
-                type="button"
-                onClick={() => setPrompt(sample.text)}
-                className="pg-sample"
-                data-tone={sample.tone}
-              >
-                <span className="pg-sample__head">
-                  <Badge tone={sample.tone}>{sample.tag}</Badge>
-                  <span className="pg-sample__id">{sample.id}</span>
-                  <span className="pg-sample__load">
-                    Load
-                    <CornerDownLeft className="w-3 h-3" aria-hidden="true" />
-                  </span>
-                </span>
-                <span className="pg-sample__text">{sample.text}</span>
-              </button>
-            ))}
-          </div>
-        </section>
+        {/* Cinematic Demo Launcher — self-driving attack selector */}
+        <DemoAttackSelector
+          samples={SAMPLES}
+          onSelectPrompt={(text, meta) => {
+            setPrompt(text);
+            if (meta?.done) {
+              // Optional: auto-trigger scan for ultra-fast demo
+              // handleSubmit({ preventDefault: () => {} });
+            }
+          }}
+        />
       </main>
     </div>
   );
