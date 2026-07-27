@@ -1224,6 +1224,214 @@
   white-space: nowrap;
 }
 
+/* ========================================================================
+   PromptGuard — Enterprise Design System Additions
+   ======================================================================== */
+
+/* --- Page Header ---------------------------------------------------------- */
+.pg-pagehead {
+  margin-bottom: 2rem;
+}
+.pg-pagehead .pg-h1 {
+  font-size: 1.75rem;
+  color: var(--pg-text);
+}
+
+/* --- Content Blocks ------------------------------------------------------- */
+.pg-block { margin-top: 1.5rem; }
+.pg-block--lg { margin-top: 2.5rem; }
+
+/* --- Demo Slot ------------------------------------------------------------ */
+.pg-demo-slot {
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: linear-gradient(135deg, rgba(37,99,235,0.03), rgba(30,58,95,0.02));
+  border: 1px dashed var(--pg-border);
+  border-radius: 1rem;
+}
+
+/* --- Form Stack ----------------------------------------------------------- */
+.pg-formstack { display: flex; flex-direction: column; gap: 1rem; }
+
+/* --- Field Group / Wrap / Action ------------------------------------------ */
+.pg-field-group { display: flex; flex-direction: column; gap: 0.375rem; }
+.pg-field-wrap { position: relative; display: flex; align-items: center; }
+.pg-field-wrap .pg-field { flex: 1; padding-right: 2.75rem; }
+.pg-field-action {
+  position: absolute; right: 0.625rem; top: 50%; transform: translateY(-50%);
+  background: none; border: none; cursor: pointer; color: var(--pg-text-3);
+  padding: 0.25rem; border-radius: 0.375rem; display: flex;
+  align-items: center; justify-content: center; transition: color 0.15s;
+}
+.pg-field-action:hover { color: var(--pg-text); }
+
+/* --- Hint / Alert Body ---------------------------------------------------- */
+.pg-hint { font-size: 0.75rem; color: var(--pg-text-3); line-height: 1.4; margin-top: 0.25rem; }
+.pg-alert__body { font-size: 0.8125rem; line-height: 1.5; color: var(--pg-text-2); }
+
+/* --- Modal System --------------------------------------------------------- */
+.pg-modal {
+  position: fixed; inset: 0; z-index: 50;
+  background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(4px);
+  display: grid; place-items: center; padding: 1rem;
+}
+.pg-modal__card { position: relative; width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto; }
+.pg-modal__close { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 1; }
+
+/* --- Auth Card ------------------------------------------------------------ */
+.pg-authcard {
+  background: var(--pg-surface); border-radius: var(--radius);
+  padding: 2rem 1.75rem 1.5rem; box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  border: 1px solid var(--pg-border);
+}
+.pg-authcard__foot {
+  margin-top: 1.25rem; padding-top: 1rem; text-align: center;
+  font-size: 0.8125rem; color: var(--pg-text-3);
+  border-top: 1px solid var(--pg-border);
+  display: flex; align-items: center; justify-content: center; gap: 0.375rem;
+}
+
+/* --- CTA Block ------------------------------------------------------------ */
+.pg-cta { margin-top: 1.5rem; }
+.pg-cta__hint { text-align: center; margin-top: 0.625rem; font-size: 0.8125rem; color: var(--pg-text-3); }
+
+/* --- Stat Panel Icon ------------------------------------------------------ */
+.pg-stat__icon {
+  width: 2.25rem; height: 2.25rem; border-radius: 0.625rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-bottom: 0.5rem;
+}
+
+/* --- Checks Grid ---------------------------------------------------------- */
+.pg-checks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.75rem; }
+.pg-checks__item {
+  display: flex; align-items: flex-start; gap: 0.625rem;
+  padding: 0.625rem 0.875rem; background: var(--pg-surface);
+  border: 1px solid var(--pg-border); border-radius: 0.625rem;
+  font-size: 0.8125rem; line-height: 1.4; color: var(--pg-text-2);
+}
+.pg-checks__verdict {
+  font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; margin-left: auto; flex-shrink: 0;
+}
+
+/* --- Segmented Control ---------------------------------------------------- */
+.pg-segment {
+  display: inline-flex; background: var(--pg-bg-2);
+  border-radius: 0.625rem; padding: 0.25rem; gap: 0.125rem;
+}
+.pg-segment__tab {
+  padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.8125rem;
+  font-weight: 500; color: var(--pg-text-3); cursor: pointer;
+  transition: all 0.15s; border: none; background: transparent;
+}
+.pg-segment__tab:hover { color: var(--pg-text); }
+.pg-segment__tab[aria-selected="true"],
+.pg-segment__tab--active {
+  background: var(--pg-surface); color: var(--pg-text);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+/* --- Finding Cards -------------------------------------------------------- */
+.pg-finding__head { display: flex; align-items: center; gap: 0.625rem; margin-bottom: 0.5rem; }
+.pg-finding__title { font-size: 0.9375rem; font-weight: 600; color: var(--pg-text); flex: 1; }
+.pg-finding__desc { font-size: 0.8125rem; color: var(--pg-text-2); line-height: 1.5; margin-bottom: 0.5rem; }
+
+/* --- Verdict Block -------------------------------------------------------- */
+.pg-verdict__head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
+.pg-verdict__mark {
+  width: 3rem; height: 3rem; border-radius: 0.75rem;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.pg-verdict__title { font-size: 1.125rem; font-weight: 700; color: var(--pg-text); }
+.pg-verdict__body { color: var(--pg-text-2); font-size: 0.875rem; line-height: 1.6; }
+
+/* --- Actions Row ---------------------------------------------------------- */
+.pg-actions { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+.pg-actions__hint { font-size: 0.75rem; color: var(--pg-text-3); margin-top: 0.375rem; }
+
+/* --- Back Button ---------------------------------------------------------- */
+.pg-backbtn {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  padding: 0.375rem 0.75rem; border-radius: 0.5rem;
+  font-size: 0.8125rem; font-weight: 500; color: var(--pg-text-2);
+  cursor: pointer; border: none; background: transparent;
+  transition: color 0.15s, background 0.15s;
+}
+.pg-backbtn:hover { color: var(--pg-text); background: var(--pg-bg-2); }
+.pg-backbtn__label { display: none; }
+@media (min-width: 640px) { .pg-backbtn__label { display: inline; } }
+
+/* --- Empty State Body ----------------------------------------------------- */
+.pg-empty__body { font-size: 0.875rem; color: var(--pg-text-3); line-height: 1.5; text-align: center; max-width: 28rem; margin: 0 auto; }
+
+/* --- End Navigation ------------------------------------------------------- */
+.pg-endnav { margin-top: 2.5rem; display: flex; justify-content: center; }
+
+/* --- Load Bar ------------------------------------------------------------- */
+.pg-loadbar {
+  height: 3px; background: var(--pg-border); border-radius: 2px; overflow: hidden; position: relative;
+}
+.pg-loadbar::after {
+  content: ""; position: absolute; inset: 0; width: 40%;
+  background: linear-gradient(90deg, var(--pg-accent), var(--pg-signal));
+  animation: pg-loadbar-slide 1.2s ease-in-out infinite; border-radius: 2px;
+}
+@keyframes pg-loadbar-slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* --- Skeleton Line -------------------------------------------------------- */
+.pg-skel-line {
+  height: 0.75rem; background: var(--pg-bg-2); border-radius: 0.25rem;
+  animation: pg-shimmer 1.5s ease-in-out infinite;
+}
+.pg-skel-line + .pg-skel-line { margin-top: 0.5rem; }
+.pg-skel-line:nth-child(even) { width: 86%; }
+.pg-skel-line:nth-child(3) { width: 72%; }
+
+/* --- Button sizing extensions --------------------------------------------- */
+.pg-btn--xl { padding: 0.875rem 1.5rem; font-size: 0.9375rem; }
+.pg-btn--lg { padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+.pg-btn--sm { padding: 0.375rem 0.875rem; font-size: 0.8125rem; }
+.pg-btn--block { width: 100%; justify-content: center; }
+.pg-btn--text {
+  background: transparent; border: none; color: var(--pg-text-2); font-weight: 500;
+  display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.375rem 0.5rem;
+  border-radius: 0.375rem; cursor: pointer; transition: color 0.15s;
+}
+.pg-btn--text:hover { color: var(--pg-text); }
+.pg-btn--google {
+  background: var(--pg-surface); border: 1px solid var(--pg-border); color: var(--pg-text);
+}
+.pg-btn--google:hover { background: var(--pg-bg-2); border-color: var(--pg-border-2); }
+
+/* --- Composer primary variant --------------------------------------------- */
+.pg-composer--primary {
+  border-color: var(--pg-accent); border-width: 1.5px;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
+}
+.pg-composer--primary:focus-within {
+  border-color: var(--pg-accent);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* --- Composer flag -------------------------------------------------------- */
+.pg-composer__flag {
+  display: inline-flex; align-items: center; gap: 0.375rem;
+  font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.04em; color: var(--pg-accent);
+}
+
+/* --- Composer status (character count etc.) ------------------------------- */
+.pg-composer__status {
+  padding: 0.5rem 1rem; font-size: 0.8125rem; color: var(--pg-text-3);
+  border-top: 1px solid var(--pg-border); background: var(--pg-surface-2);
+  border-radius: 0 0 var(--radius) var(--radius);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+
 /* Google AI-style rotating gradient border */
 @keyframes glow-spin {
   from { --angle: 0deg; }

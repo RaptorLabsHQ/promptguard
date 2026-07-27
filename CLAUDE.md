@@ -1,99 +1,78 @@
-# Demo Attack Selector — Cinematic Judge Experience
+# Frontend UX Audit Brief for Claude Code Opus 5
 
-## Problem
-Judges review hundreds of submissions. They won't type their own prompts. The demo must be self-driving — click a floating element, see a blockbuster animation, get a complete prompt in the input, ready to scan. No typing required.
+Read src/App.jsx and src/index.css in full. Then execute a comprehensive UX audit and apply fixes.
 
-## Visual Concept
+## Audit Checklist — Fix Everything Below
 
-### Step 0 — Floating Trigger
-A prominent frosted-glass floating button at the top of the New Scan page, above the input:
-"TRY A DEMO ATTACK" with a subtle pulsing glow ring around it. Immediately visible on page load.
+### 1. DASHBOARD PAGE
+- Hero section: "Every prompt, inspected before it ships." — is the spacing balanced? Is the CTA prominent?
+- Stat panels (LAST SCAN, TOTAL SCANS, FINDINGS): are they visually distinct? Do they have proper information hierarchy?
+- "New Scan" CTA button: is it the most visually prominent element? Is the color contrast strong enough?
+- "Paste a prompt · results in seconds" — is this subtitle clear and concise?
+- Empty state for scan log: "Run your first scan" — is it welcoming and clear?
+- Overall dashboard spacing: too much whitespace? Too cluttered? Balance needed.
 
-### Step 1 — Cloud Cards Fly In
-Click the trigger → 6 frosted glass cards animate in from the sides with staggered spring entrance (staggerChildren: 0.08). Each card shows:
-- Category icon (shield/alert/lock/link/code/eye from lucide-react)
-- Category name (Prompt Injection, PII Leak, etc.)
-- Severity badge (Critical/High/Medium)
-- Brief description (10-15 words)
-- Subtle hover glow
+### 2. NEW SCAN PAGE
+- DemoAttackSelector button: does it have proper top margin spacing from the heading? 
+- The caption "Six real attack payloads · one click loads the prompt" — is it properly styled?
+- When cloud cards appear, do they push content down gracefully or cause layout shift?
+- Form spacing: are the prompt textarea and response textarea visually balanced?
+- "Analyze Prompt" button: disabled state clear? Enabled state obvious?
+- Character counter "0 characters" — helpful or clutter?
+- Overall page flow: heading → demo button → form. Is the rhythm right?
 
-Cards float with gentle idle animation (subtle Y-axis oscillation, different phase per card).
+### 3. RESULTS PAGE
+- Loading state: is the "Analyzing..." spinner professional?
+- Findings list: severity badges clear? Left-border color coding visible?
+- Evidence blocks: readable? Proper monospace styling?
+- Recommendation blocks: actionable feel?
+- Back navigation: easy to find?
+- "New Scan" secondary CTA: visible?
+- Empty findings state (scan with no findings = clean): handled?
 
-### Step 2 — Card Click → Character Rain
-User clicks a card → THE MAGIC HAPPENS:
+### 4. AUTH MODAL
+- Sign In / Create Account toggle: clear and obvious?
+- Form fields: proper labels, placeholders, spacing?
+- Google sign-in button: properly styled? Not an afterthought?
+- Error states: if login fails, is feedback clear?
+- Modal backdrop: opacity right? Click-outside-to-close working?
 
-1. The card glows bright for 200ms
-2. The prompt text "shatters" — each character becomes a glowing blue particle
-3. Characters cascade down the screen in a beautiful rain pattern
-4. Characters flow into the textarea input field
-5. As each character "lands," it appears in the textarea with a subtle glow
-6. The textarea shows a typewriter-like construction of the full prompt
-7. Total animation: ~1.5 seconds
+### 5. GLOBAL UX
+- Typography hierarchy: headings (h1, h2), body, labels — consistent sizing?
+- Color contrast: all text meets WCAG AA (4.5:1 for body, 3:1 for large)?
+- Spacing rhythm: consistent padding/margins? No random gaps?
+- Button hierarchy: primary (solid navy), secondary (ghost/outline), tertiary (text) — consistently applied?
+- Transitions: hover states on all interactive elements?
+- Focus states: visible focus rings for keyboard navigation?
+- Responsive: mobile layout doesn't break? Cards stack properly?
+- Loading states: skeleton or spinner pattern consistent?
 
-### Step 3 — Ready to Scan
-After the character rain completes, the textarea contains the complete demo prompt with all special characters. The "Analyze Prompt" button pulses briefly to draw attention. User clicks it → scan runs.
+### 6. COPY & MICROCOPY
+- Is every label clear and concise?
+- Are button texts action-oriented?
+- Is tooltip/helper text helpful or noise?
+- "Security Dashboard" vs "Dashboard" — is the subtitle right?
+- "Submit for analysis" eyebrow — clear?
 
-## Technical Implementation
+### 7. SPECIFIC FIXES TO APPLY
+- Ensure consistent 24px/32px spacing rhythm throughout
+- All buttons need visible hover + focus states
+- Primary CTAs should be navy (#1e3a5f) with white text
+- Secondary actions should be outlined or ghost
+- Severity badges must have distinct, scannable colors
+- Form inputs need clear focus rings (#2563eb)
+- Any text below 14px must have sufficient contrast
+- The page should feel "designed" not "assembled"
 
-### Library: framer-motion (npm install framer-motion)
+### CONSTRAINTS
+- Keep ALL Base44 SDK integration intact
+- Keep the component structure (state routing, no react-router)
+- Keep the navy blue brand palette
+- Keep framer-motion animations
+- Keep PremiumAnimatedBackground
+- Keep DemoAttackSelector
 
-### Component: DemoAttackSelector
-Renders in the NewScan page, positioned above the textarea.
+### OUTPUT
+Apply all fixes by editing src/App.jsx and src/index.css. Then run `npm run build` to verify.
 
-```jsx
-<AnimatePresence>
-  {step === 'trigger' && <FloatingTrigger onClick={open} />}
-  {step === 'cards' && (
-    <CloudCardGrid>
-      {SAMPLES.map((sample, i) => (
-        <CloudCard 
-          key={sample.id}
-          sample={sample}
-          index={i}
-          onClick={(e) => triggerCharacterRain(sample, e)}
-        />
-      ))}
-    </CloudCardGrid>
-  )}
-</AnimatePresence>
-```
-
-### Character Rain Animation
-Use framer-motion with:
-- `motion.div` for each character with `initial`, `animate`, `exit`
-- Characters start at card position, end at textarea position
-- `transition={{ type: "spring", stiffness: 200, damping: 20, delay: i * 0.02 }}`
-- Staggered delays (0.02s per character)
-
-Alternative approach if position tracking is too complex:
-- Canvas overlay creates particle burst from card
-- Particles flow in a curve toward the textarea
-- Textarea shows characters appearing one by one with typewriter + glow effect
-- canvas particles dissolve as characters "arrive" in the textarea
-
-### Styling
-- Frosted glass cards: `backdrop-blur-xl bg-white/80 border border-white/20 shadow-xl`
-- Floating button: `backdrop-blur-md bg-navy/90 text-white rounded-full`
-- Character rain particles: `text-[#2563eb] font-mono` glowing blue
-- Cards: rounded-2xl, subtle navy border, hover: shadow-2xl hover:-translate-y-1
-
-## Integration
-- Install framer-motion: `npm install framer-motion`
-- Import in App.jsx: `import { motion, AnimatePresence } from "framer-motion"`
-- Add DemoAttackSelector component inside the NewScan view, above the textarea
-- The component receives `onSelectPrompt(text)` callback to populate the textarea
-- Remove the existing "Try an example" section (replaced by this)
-
-## Visual Quality
-- Every motion uses spring physics (no linear/bezier)
-- Staggered children for entrance
-- Hover states with subtle glow (box-shadow with brand blue)
-- Cards bounce slightly when they appear
-- The character rain must look MAGICAL — not like a bug or glitch
-- Dark enough to be visible against the light background
-
-## File Changes
-1. Install framer-motion
-2. Create src/components/DemoAttackSelector.jsx
-3. Modify src/App.jsx: import DemoAttackSelector, integrate into NewScan section, remove old "Try an example" section
-4. Build: `npm run build` MUST pass
+Quality bar: This must look like a Vercel/Stripe/Linear-grade product, not a hackathon prototype.
