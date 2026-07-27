@@ -3,90 +3,82 @@
 @tailwind utilities;
 
 /* ==========================================================================
-   PromptGuard — AI Prompt Security Scanner
-   Enterprise design system. Light theme, navy blue.
+   PromptGuard — RaptorLabs Dark Premium Theme
    ========================================================================== */
 
 @layer base {
   :root {
     /* shadcn/tailwind bridge tokens */
-    --background: 220 27% 98%;
-    --foreground: 222 47% 11%;
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
-    --primary: 214 52% 25%;
+    --background: 0 0% 2%;
+    --foreground: 0 0% 100%;
+    --card: 345 15% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 345 15% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 359 83% 35%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 215 25% 27%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-    --accent: 221 83% 53%;
+    --secondary: 345 15% 12%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 345 15% 12%;
+    --muted-foreground: 345 2% 60%;
+    --accent: 0 67% 53%;
     --accent-foreground: 0 0% 100%;
-    --destructive: 0 74% 42%;
+    --destructive: 0 83% 35%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 221 83% 53%;
+    --border: 345 15% 18%;
+    --input: 345 15% 18%;
+    --ring: 0 67% 53%;
     --radius: 0.625rem;
 
     /* --- Surfaces --- */
-    --pg-bg: #f8f9fb;
-    --pg-bg-2: #f1f5f9;
-    --pg-surface: #ffffff;
-    --pg-surface-2: #f8fafc;
-    --pg-border: #e2e8f0;
-    --pg-border-2: #cbd5e1;
+    --pg-bg: #050303;
+    --pg-bg-2: #0D0A0B;
+    --pg-surface: #150F10;
+    --pg-surface-2: #1c1516;
+    --pg-border: #302C2D;
+    --pg-border-2: #4a4445;
 
-    /* --- Brand: deep navy anchored, blue accented --- */
-    --pg-navy: #1e3a5f;
-    --pg-navy-deep: #16293f;
-    --pg-navy-lift: #2b4d78;
-    --pg-accent: #2563eb;
-    --pg-accent-deep: #1d4ed8;
-    --pg-signal: #3b82f6;
-    --pg-wash: #eff6ff;
+    /* --- Brand: Crimson & Accent Red --- */
+    --pg-navy: #A20F10;
+    --pg-navy-deep: #6B0A0B;
+    --pg-navy-lift: #D63B3B;
+    --pg-accent: #D63B3B;
+    --pg-accent-deep: #A20F10;
+    --pg-signal: #D63B3B;
+    --pg-wash: #200809;
 
-    /* --- Text ramp (all >= 4.5:1 on white through --pg-text-3) --- */
-    --pg-text: #0f172a;
-    --pg-text-2: #475569;
-    --pg-text-3: #64748b;
-    --pg-text-4: #94a3b8;
+    /* --- Text ramp --- */
+    --pg-text: #FFFFFF;
+    --pg-text-2: #9E9A9B;
+    --pg-text-3: #6E6A6B;
+    --pg-text-4: #4E4A4B;
 
-    /* --- Severity marks: validated for CVD separation on a white surface.
-           `-ink` steps carry text/icons; `-mark` steps carry fills. --- */
-    --sev-critical: #b91c1c;
-    --sev-critical-ink: #b91c1c;
-    --sev-high: #f97316;
-    --sev-high-ink: #c2410c;
-    --sev-medium: #a16207;
-    --sev-medium-ink: #a16207;
-    --sev-low: #0284c7;
-    --sev-low-ink: #0369a1;
+    /* --- Severity marks --- */
+    --sev-critical: #D63B3B;
+    --sev-critical-ink: #FFFFFF;
+    --sev-high: #A20F10;
+    --sev-high-ink: #FFFFFF;
+    --sev-medium: #6E6A6B;
+    --sev-medium-ink: #FFFFFF;
+    --sev-low: #302C2D;
+    --sev-low-ink: #9E9A9B;
     --sev-clean: #059669;
-    --sev-clean-ink: #047857;
+    --sev-clean-ink: #FFFFFF;
 
     /* --- Type --- */
-    --pg-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
-      'Helvetica Neue', Arial, sans-serif;
-    --pg-mono: ui-monospace, 'SFMono-Regular', 'SF Mono', Menlo, Consolas,
-      'Liberation Mono', 'Courier New', monospace;
+    --pg-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --pg-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
     /* --- Geometry & elevation --- */
     --pg-r: 12px;
     --pg-r-sm: 8px;
-    --pg-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
-    --pg-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px -6px rgba(15, 23, 42, 0.1);
-    --pg-shadow-lg: 0 1px 2px rgba(15, 23, 42, 0.04), 0 16px 40px -20px rgba(15, 23, 42, 0.22);
+    --pg-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+    --pg-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    --pg-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.8);
   }
 
   * {
     @apply border-border;
-  }
-
-  html {
-    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -94,102 +86,89 @@
     background-color: var(--pg-bg);
     color: var(--pg-text);
     font-family: var(--pg-sans);
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'ss01';
     overflow-x: hidden;
   }
 
   ::selection {
-    background: rgba(37, 99, 235, 0.18);
+    background: rgba(162, 15, 16, 0.4);
     color: var(--pg-text);
   }
 
   ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
   }
   ::-webkit-scrollbar-track {
     background: var(--pg-bg);
   }
   ::-webkit-scrollbar-thumb {
-    background: var(--pg-border-2);
-    border: 3px solid var(--pg-bg);
+    background: var(--pg-border);
+    border: 2px solid var(--pg-bg);
     border-radius: 8px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: var(--pg-text-4);
+    background: var(--pg-border-2);
   }
 
-  /* Zero-specificity focus ring: components can still override */
-  :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  :focus-visible {
     outline: 2px solid var(--pg-accent);
     outline-offset: 2px;
-    border-radius: var(--pg-r-sm);
   }
 }
 
-/* ==========================================================================
-   Everything below is intentionally UNLAYERED so it is emitted after
-   `@tailwind utilities` and outranks the slate-themed utility classes that
-   ship baked into src/components/ui/{button,input}.jsx.
-   ========================================================================== */
-
-/* --- Tone tokens: one attribute drives colour for badges/rails/meters -----
-   --tone      ink: text, icons, borders (AA on white)
-   --tone-mark fill: meter segments, dots, status rails
-   --tone-soft tinted surface
-   --tone-line hairline border                                              */
+/* --- Tone tokens --- */
 [data-tone='critical'] {
   --tone: var(--sev-critical-ink);
   --tone-mark: var(--sev-critical);
-  --tone-soft: #fef2f2;
-  --tone-line: #fecaca;
+  --tone-soft: #2a0809;
+  --tone-line: #A20F10;
 }
 [data-tone='high'] {
   --tone: var(--sev-high-ink);
   --tone-mark: var(--sev-high);
-  --tone-soft: #fff7ed;
-  --tone-line: #fed7aa;
+  --tone-soft: #200809;
+  --tone-line: #6B0A0B;
 }
 [data-tone='medium'] {
   --tone: var(--sev-medium-ink);
   --tone-mark: var(--sev-medium);
-  --tone-soft: #fefce8;
-  --tone-line: #fde68a;
+  --tone-soft: #1c1516;
+  --tone-line: #302C2D;
 }
 [data-tone='low'] {
   --tone: var(--sev-low-ink);
   --tone-mark: var(--sev-low);
-  --tone-soft: #f0f9ff;
-  --tone-line: #bae6fd;
+  --tone-soft: #150F10;
+  --tone-line: #302C2D;
 }
 [data-tone='clean'] {
   --tone: var(--sev-clean-ink);
   --tone-mark: var(--sev-clean);
-  --tone-soft: #ecfdf5;
-  --tone-line: #a7f3d0;
+  --tone-soft: #062016;
+  --tone-line: #059669;
 }
 [data-tone='brand'] {
-  --tone: var(--pg-navy);
-  --tone-mark: var(--pg-accent);
+  --tone: var(--pg-text);
+  --tone-mark: var(--pg-navy);
   --tone-soft: var(--pg-wash);
-  --tone-line: #bfdbfe;
+  --tone-line: var(--pg-border);
 }
 [data-tone='signal'] {
-  --tone: var(--pg-accent-deep);
+  --tone: var(--pg-text);
   --tone-mark: var(--pg-accent);
   --tone-soft: var(--pg-wash);
-  --tone-line: #bfdbfe;
+  --tone-line: var(--pg-border);
 }
 [data-tone='neutral'] {
-  --tone: #334155;
-  --tone-mark: #64748b;
-  --tone-soft: #f1f5f9;
-  --tone-line: #e2e8f0;
+  --tone: var(--pg-text-2);
+  --tone-mark: var(--pg-border-2);
+  --tone-soft: var(--pg-surface-2);
+  --tone-line: var(--pg-border);
 }
 [data-tone='idle'] {
   --tone: var(--pg-text-3);
   --tone-mark: var(--pg-text-4);
-  --tone-soft: var(--pg-surface-2);
+  --tone-soft: var(--pg-bg-2);
   --tone-line: var(--pg-border);
 }
 
@@ -197,12 +176,10 @@
 .pg-app {
   position: relative;
   min-height: 100vh;
-  min-height: 100dvh;
   background-color: var(--pg-bg);
   isolation: isolate;
 }
 
-/* Fixed depth plate: a fine engineering grid under a soft blue wash */
 .pg-app::before {
   content: '';
   position: fixed;
@@ -210,9 +187,9 @@
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(90% 52% at 50% -8%, rgba(37, 99, 235, 0.08), transparent 62%),
-    linear-gradient(to right, rgba(15, 23, 42, 0.028) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.028) 1px, transparent 1px);
+    radial-gradient(90% 52% at 50% -8%, rgba(162, 15, 16, 0.15), transparent 62%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
   background-size: 100% 100%, 56px 56px, 56px 56px;
 }
 
@@ -236,9 +213,9 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: rgba(255, 255, 255, 0.86);
-  backdrop-filter: blur(14px) saturate(160%);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  background: rgba(21, 15, 16, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--pg-border);
 }
 .pg-header__inner {
@@ -259,8 +236,8 @@
 .pg-brand__name {
   display: block;
   font-size: 16px;
-  font-weight: 650;
-  letter-spacing: -0.022em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--pg-text);
   line-height: 1.15;
 }
@@ -286,15 +263,15 @@
   height: 36px;
   flex: none;
   border-radius: var(--pg-r-sm);
-  border: 1px solid transparent;
-  color: var(--pg-text-3);
-  background: transparent;
-  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+  border: 1px solid var(--pg-border);
+  color: var(--pg-text-2);
+  background: var(--pg-surface);
+  transition: all 150ms ease;
 }
 .pg-iconbtn:hover {
-  color: var(--pg-navy);
-  background: var(--pg-bg-2);
-  border-color: var(--pg-border);
+  color: var(--pg-text);
+  background: var(--pg-surface-2);
+  border-color: var(--pg-accent);
 }
 
 .pg-user {
@@ -310,11 +287,6 @@
   color: var(--pg-text-2);
   max-width: 260px;
 }
-.pg-user > span {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
 @media (min-width: 768px) {
   .pg-user {
     display: inline-flex;
@@ -324,7 +296,6 @@
 /* --- Typography helpers -------------------------------------------------- */
 .pg-mono {
   font-family: var(--pg-mono);
-  font-variant-ligatures: none;
 }
 
 .pg-eyebrow {
@@ -337,8 +308,8 @@
   background: var(--pg-surface);
   box-shadow: var(--pg-shadow-sm);
   font-size: 11.5px;
-  font-weight: 550;
-  letter-spacing: 0.01em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--pg-text-2);
 }
 
@@ -354,14 +325,14 @@
 .pg-h1 {
   font-size: clamp(1.85rem, 1.2rem + 2.7vw, 2.75rem);
   line-height: 1.08;
-  font-weight: 700;
-  letter-spacing: -0.032em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--pg-text);
 }
 .pg-h2 {
   font-size: 1.0625rem;
-  font-weight: 650;
-  letter-spacing: -0.014em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--pg-text);
 }
 .pg-lead {
@@ -375,8 +346,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--tone-mark, var(--sev-clean));
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tone-mark, var(--sev-clean)) 18%, transparent);
+  background: var(--tone-mark, var(--pg-accent));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--tone-mark, var(--pg-accent)) 25%, transparent);
   flex: none;
 }
 
@@ -402,8 +373,6 @@
 }
 
 /* --- Buttons ------------------------------------------------------------- */
-/* Doubled selector (0,2,0) outranks the `bg-slate-900 / h-9 / rounded-md`
-   utilities hardcoded inside src/components/ui/button.jsx. */
 .pg-btn.pg-btn {
   position: relative;
   display: inline-flex;
@@ -413,56 +382,46 @@
   height: auto;
   padding: 10px 16px;
   border-radius: var(--pg-r-sm);
-  border: 1px solid var(--pg-border-2);
-  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  background: var(--pg-surface-2);
   color: var(--pg-text);
   font-family: var(--pg-sans);
   font-size: 13.5px;
   font-weight: 600;
-  letter-spacing: -0.005em;
-  white-space: nowrap;
   box-shadow: var(--pg-shadow-sm);
-  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease,
-    box-shadow 160ms ease, transform 160ms ease;
+  transition: all 160ms ease;
 }
 .pg-btn.pg-btn:hover:not(:disabled) {
-  background: var(--pg-surface-2);
-  border-color: var(--pg-text-4);
+  background: var(--pg-border);
+  border-color: var(--pg-accent);
 }
 .pg-btn.pg-btn:active:not(:disabled) {
   transform: translateY(1px);
 }
 .pg-btn.pg-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .pg-btn--primary.pg-btn--primary {
-  border-color: var(--pg-navy-deep);
+  border-color: var(--pg-navy);
   color: #fff;
-  background: linear-gradient(180deg, var(--pg-navy-lift), var(--pg-navy));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 1px 2px rgba(15, 23, 42, 0.14),
-    0 8px 20px -12px rgba(30, 58, 95, 0.7);
+  background: linear-gradient(180deg, var(--pg-navy), var(--pg-navy-deep));
+  box-shadow: 0 4px 14px rgba(162, 15, 16, 0.4);
 }
 .pg-btn--primary.pg-btn--primary:hover:not(:disabled) {
-  background: linear-gradient(180deg, #35608f, #234570);
-  border-color: var(--pg-navy-deep);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    0 1px 2px rgba(15, 23, 42, 0.16),
-    0 12px 24px -12px rgba(30, 58, 95, 0.8);
+  background: linear-gradient(180deg, var(--pg-navy-lift), var(--pg-navy));
+  border-color: var(--pg-accent);
+  box-shadow: 0 6px 20px rgba(162, 15, 16, 0.6);
 }
 
 .pg-btn--ghost.pg-btn--ghost {
   background: transparent;
   border-color: var(--pg-border);
   color: var(--pg-text-2);
-  box-shadow: none;
 }
 .pg-btn--ghost.pg-btn--ghost:hover:not(:disabled) {
-  background: var(--pg-bg-2);
+  background: var(--pg-surface-2);
   color: var(--pg-text);
   border-color: var(--pg-border-2);
 }
@@ -481,33 +440,32 @@
 }
 
 /* --- Fields -------------------------------------------------------------- */
-/* Doubled selector for the same reason as .pg-btn (input.jsx ships h-9). */
 .pg-field.pg-field {
   display: block;
   width: 100%;
   height: auto;
   padding: 10px 13px;
   border-radius: var(--pg-r-sm);
-  border: 1px solid var(--pg-border-2);
-  background: var(--pg-surface);
+  border: 1px solid var(--pg-border);
+  background: var(--pg-bg-2);
   color: var(--pg-text);
   font-family: var(--pg-sans);
   font-size: 14px;
   line-height: 1.45;
   box-shadow: var(--pg-shadow-sm);
-  transition: border-color 150ms ease, box-shadow 150ms ease;
+  transition: all 150ms ease;
 }
 .pg-field.pg-field::placeholder {
-  color: var(--pg-text-4);
+  color: var(--pg-text-3);
 }
 .pg-field.pg-field:hover:not(:focus) {
-  border-color: var(--pg-text-4);
+  border-color: var(--pg-border-2);
 }
 .pg-field.pg-field:focus,
 .pg-field.pg-field:focus-visible {
   outline: none;
   border-color: var(--pg-accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  box-shadow: 0 0 0 3px rgba(162, 15, 16, 0.3);
 }
 
 /* --- Dashboard hero ------------------------------------------------------ */
@@ -519,23 +477,21 @@
   background: var(--pg-surface);
   box-shadow: var(--pg-shadow-lg);
 }
-/* navy → blue capline */
 .pg-hero::before {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--pg-navy), var(--pg-accent) 42%, var(--pg-signal) 70%, transparent);
+  background: linear-gradient(90deg, var(--pg-navy), var(--pg-accent), transparent);
 }
-/* soft blue field + fine grid, faded out to the left */
 .pg-hero__field {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(70% 120% at 92% 0%, rgba(37, 99, 235, 0.1), transparent 64%),
-    linear-gradient(to right, rgba(30, 58, 95, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(30, 58, 95, 0.05) 1px, transparent 1px);
+    radial-gradient(70% 120% at 92% 0%, rgba(162, 15, 16, 0.15), transparent 64%),
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 100% 100%, 40px 40px, 40px 40px;
   -webkit-mask-image: linear-gradient(105deg, transparent 18%, #000 78%);
   mask-image: linear-gradient(105deg, transparent 18%, #000 78%);
@@ -586,7 +542,6 @@
   margin-top: 4px;
   font-size: 15px;
   font-weight: 650;
-  letter-spacing: -0.015em;
   color: var(--pg-text);
 }
 
@@ -606,7 +561,7 @@
   position: relative;
   overflow: hidden;
   padding: 16px 16px 14px;
-  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+  transition: all 160ms ease;
 }
 .pg-stat::before {
   content: '';
@@ -616,7 +571,7 @@
   background: var(--tone-mark);
 }
 .pg-stat:hover {
-  border-color: var(--pg-border-2);
+  border-color: var(--pg-accent);
   box-shadow: var(--pg-shadow-lg);
 }
 @media (min-width: 640px) {
@@ -629,12 +584,11 @@
   align-items: center;
   gap: 8px;
 }
-/* Proportional figures: tabular-nums loosens large standalone values. */
 .pg-stat__value {
   font-size: clamp(1.7rem, 1.25rem + 1.5vw, 2.25rem);
-  font-weight: 680;
+  font-weight: 700;
   line-height: 1;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: var(--pg-text);
   margin-top: 12px;
 }
@@ -643,12 +597,11 @@
   font-size: 12px;
   color: var(--pg-text-3);
 }
-/* Track is a light step of the fill's own hue, so state reads across the bar. */
 .pg-stat__meter {
   margin-top: 14px;
   height: 4px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--tone-mark) 15%, #fff);
+  background: #150F10;
   overflow: hidden;
 }
 .pg-stat__meter > i {
@@ -659,7 +612,7 @@
   transition: width 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* --- Scan log: one card, divided rows ------------------------------------ */
+/* --- Scan log ------------------------------------------------------------ */
 .pg-log {
   border: 1px solid var(--pg-border);
   border-radius: var(--pg-r);
@@ -678,7 +631,7 @@
   padding: 14px 16px;
   text-align: left;
   background: transparent;
-  transition: background-color 150ms ease;
+  transition: all 150ms ease;
 }
 .pg-log-row + .pg-log-row {
   border-top: 1px solid var(--pg-border);
@@ -708,7 +661,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--tone);
+  color: var(--tone-mark);
 }
 .pg-log-row__prompt {
   display: block;
@@ -728,13 +681,9 @@
   flex-wrap: wrap;
   gap: 3px 14px;
 }
-.pg-log-row__meta .pg-mono {
-  font-size: 11px;
-  letter-spacing: 0.02em;
-}
 .pg-log-row__chev {
   color: var(--pg-text-4);
-  transition: color 150ms ease, transform 150ms ease;
+  transition: all 150ms ease;
 }
 .pg-log-row[data-interactive='true']:hover .pg-log-row__chev {
   color: var(--pg-accent);
@@ -765,16 +714,15 @@
   border-radius: 6px;
   border: 1px solid var(--tone-line);
   background: var(--tone-soft);
-  color: var(--tone);
+  color: var(--tone-mark);
   font-family: var(--pg-sans);
   font-size: 11.5px;
   font-weight: 600;
-  letter-spacing: -0.005em;
   white-space: nowrap;
 }
 .pg-badge--solid {
-  background: var(--tone);
-  border-color: var(--tone);
+  background: var(--tone-mark);
+  border-color: var(--tone-mark);
   color: #fff;
   text-transform: capitalize;
 }
@@ -788,23 +736,22 @@
   background: var(--pg-surface);
   font-size: 11.5px;
   font-weight: 550;
-  color: var(--pg-text-3);
-  white-space: nowrap;
+  color: var(--pg-text-2);
 }
 
-/* --- Composer: prompt / response inputs ---------------------------------- */
+/* --- Composer ------------------------------------------------------------ */
 .pg-composer {
   position: relative;
-  border: 1px solid var(--pg-border-2);
+  border: 1px solid var(--pg-border);
   border-radius: var(--pg-r);
   background: var(--pg-surface);
   box-shadow: var(--pg-shadow-sm);
   overflow: hidden;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition: all 160ms ease;
 }
 .pg-composer:focus-within {
   border-color: var(--pg-accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+  box-shadow: 0 0 0 3px rgba(162, 15, 16, 0.3);
 }
 .pg-composer__head {
   display: flex;
@@ -832,7 +779,7 @@
   line-height: 1.65;
 }
 .pg-composer__area::placeholder {
-  color: var(--pg-text-4);
+  color: var(--pg-text-3);
 }
 .pg-composer__foot {
   display: flex;
@@ -869,7 +816,7 @@
   background: var(--pg-surface);
   box-shadow: var(--pg-shadow-sm);
   overflow: hidden;
-  transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+  transition: all 150ms ease;
 }
 .pg-sample::before {
   content: '';
@@ -881,7 +828,7 @@
   background: var(--tone-mark);
 }
 .pg-sample:hover {
-  border-color: var(--pg-border-2);
+  border-color: var(--pg-accent);
   box-shadow: var(--pg-shadow-lg);
   transform: translateY(-1px);
 }
@@ -894,8 +841,7 @@
 .pg-sample__id {
   font-family: var(--pg-mono);
   font-size: 10.5px;
-  letter-spacing: 0.06em;
-  color: var(--pg-text-4);
+  color: var(--pg-text-3);
 }
 .pg-sample__load {
   margin-left: auto;
@@ -904,7 +850,7 @@
   gap: 5px;
   font-size: 11.5px;
   font-weight: 600;
-  color: var(--pg-text-4);
+  color: var(--pg-text-3);
   transition: color 150ms ease;
 }
 .pg-sample:hover .pg-sample__load {
@@ -914,14 +860,13 @@
   font-size: 13px;
   line-height: 1.55;
   color: var(--pg-text-2);
-  word-break: break-word;
 }
 
-/* --- Code blocks (scan input, evidence) ---------------------------------- */
+/* --- Code blocks --------------------------------------------------------- */
 .pg-code {
   border: 1px solid var(--pg-border);
   border-radius: var(--pg-r-sm);
-  background: var(--pg-surface-2);
+  background: var(--pg-bg-2);
   overflow: hidden;
 }
 .pg-code__head {
@@ -943,21 +888,13 @@
   line-height: 1.7;
   color: var(--pg-text-2);
   white-space: pre-wrap;
-  word-break: break-word;
+  word-break: break-all;
   max-height: 340px;
   overflow: auto;
 }
-/* evidence variant — the captured excerpt that proves the finding */
 .pg-code--evidence {
-  border-color: var(--pg-border-2);
-  background: #fff;
-}
-.pg-code--evidence .pg-code__head {
-  background: var(--pg-surface-2);
-  color: var(--pg-text-2);
-}
-.pg-code--evidence .pg-code__body {
-  color: var(--pg-text);
+  border-left: 3px solid var(--pg-accent);
+  background: var(--pg-bg-2);
 }
 
 /* --- Recommendation ------------------------------------------------------ */
@@ -966,10 +903,10 @@
   grid-template-columns: auto minmax(0, 1fr);
   gap: 11px;
   padding: 13px 15px;
-  border: 1px solid #bfdbfe;
+  border: 1px solid var(--pg-border);
   border-left: 3px solid var(--pg-accent);
   border-radius: var(--pg-r-sm);
-  background: var(--pg-wash);
+  background: var(--pg-surface-2);
 }
 .pg-remedy__icon {
   display: grid;
@@ -977,9 +914,8 @@
   width: 22px;
   height: 22px;
   border-radius: 6px;
-  background: rgba(37, 99, 235, 0.12);
-  color: var(--pg-accent-deep);
-  flex: none;
+  background: rgba(162, 15, 16, 0.2);
+  color: var(--pg-accent);
 }
 .pg-remedy__label {
   display: block;
@@ -987,13 +923,13 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: var(--pg-accent-deep);
+  color: var(--pg-accent);
 }
 .pg-remedy__body {
   margin-top: 4px;
   font-size: 13.5px;
   line-height: 1.6;
-  color: #1e3a5f;
+  color: var(--pg-text-2);
 }
 
 /* --- Finding cards ------------------------------------------------------- */
@@ -1002,12 +938,10 @@
   border-left-width: 3px;
   border-left-color: var(--tone-mark);
   padding: 18px;
-  transition: border-color 160ms ease, box-shadow 160ms ease;
+  transition: all 160ms ease;
 }
 .pg-finding:hover {
-  border-top-color: var(--pg-border-2);
-  border-right-color: var(--pg-border-2);
-  border-bottom-color: var(--pg-border-2);
+  border-color: var(--pg-accent);
   box-shadow: var(--pg-shadow-lg);
 }
 @media (min-width: 640px) {
@@ -1023,7 +957,7 @@
   border-radius: 999px;
   overflow: hidden;
   background: var(--pg-bg-2);
-  gap: 2px; /* surface gap so adjacent segments never bleed together */
+  gap: 2px;
 }
 .pg-meter > i {
   display: block;
@@ -1062,13 +996,11 @@
 .pg-legend__count {
   margin-left: auto;
   font-size: 14px;
-  font-weight: 680;
-  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   color: var(--pg-text);
 }
 .pg-legend__count[data-zero='true'] {
   color: var(--pg-text-4);
-  font-weight: 550;
 }
 
 /* --- Alerts / banners ---------------------------------------------------- */
@@ -1081,7 +1013,7 @@
   border-left: 3px solid var(--tone-mark);
   border-radius: var(--pg-r-sm);
   background: var(--tone-soft);
-  color: var(--tone);
+  color: var(--pg-text);
   font-size: 13.5px;
   line-height: 1.55;
 }
@@ -1090,7 +1022,6 @@
 .pg-auth {
   position: relative;
   min-height: 100vh;
-  min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: 40px 16px;
@@ -1103,10 +1034,8 @@
   height: 74px;
   border-radius: 18px;
   border: 1px solid var(--pg-border);
-  background: linear-gradient(180deg, #ffffff, var(--pg-wash));
-  box-shadow:
-    inset 0 1px 0 #fff,
-    0 12px 28px -16px rgba(30, 58, 95, 0.5);
+  background: var(--pg-surface);
+  box-shadow: var(--pg-shadow-lg);
 }
 
 .pg-divider {
@@ -1115,7 +1044,7 @@
   gap: 12px;
   font-size: 11.5px;
   font-weight: 550;
-  color: var(--pg-text-4);
+  color: var(--pg-text-3);
 }
 .pg-divider::before,
 .pg-divider::after {
@@ -1123,17 +1052,6 @@
   flex: 1;
   height: 1px;
   background: var(--pg-border);
-}
-
-.pg-link {
-  color: var(--pg-accent);
-  font-weight: 600;
-  transition: color 150ms ease;
-}
-.pg-link:hover {
-  color: var(--pg-accent-deep);
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 /* --- Empty & loading states ---------------------------------------------- */
@@ -1151,67 +1069,45 @@
   height: 60px;
   margin-bottom: 12px;
   border-radius: 16px;
-  border: 1px solid var(--tone-line, var(--pg-border));
-  background: var(--tone-soft, var(--pg-surface-2));
-  color: var(--tone, var(--pg-text-3));
+  border: 1px solid var(--pg-border);
+  background: var(--pg-surface-2);
+  color: var(--pg-accent);
 }
 .pg-empty__title {
   font-size: 15px;
-  font-weight: 650;
-  letter-spacing: -0.012em;
+  font-weight: 700;
   color: var(--pg-text);
 }
 
 .pg-skel {
   height: 64px;
   border-bottom: 1px solid var(--pg-border);
-  background: linear-gradient(90deg, #f8fafc 0%, #eef2f7 50%, #f8fafc 100%);
+  background: linear-gradient(90deg, #150F10 0%, #302C2D 50%, #150F10 100%);
   background-size: 200% 100%;
-  background-position: 0% 0%;
 }
 .pg-skel:last-child {
   border-bottom: 0;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .pg-skel {
-    animation: pg-shimmer 1.5s ease-in-out infinite;
-  }
-}
 @keyframes pg-shimmer {
-  from {
-    background-position: 130% 0%;
-  }
-  to {
-    background-position: -30% 0%;
-  }
+  from { background-position: 130% 0%; }
+  to { background-position: -30% 0%; }
+}
+.pg-skel {
+  animation: pg-shimmer 1.5s ease-in-out infinite;
 }
 
-/* Functional (not decorative) indicators */
 .pg-spin {
   animation: pg-spin 900ms linear infinite;
 }
 @keyframes pg-spin {
-  to {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 .pg-live {
   animation: pg-live 1.8s ease-in-out infinite;
 }
 @keyframes pg-live {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.4;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .pg-spin,
-  .pg-live {
-    animation: none;
-  }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 /* --- Utility ------------------------------------------------------------- */
@@ -1223,10 +1119,6 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
-/* ========================================================================
-   PromptGuard — Enterprise Design System Additions
-   ======================================================================== */
 
 /* --- Page Header ---------------------------------------------------------- */
 .pg-pagehead {
@@ -1245,7 +1137,7 @@
 .pg-demo-slot {
   margin-bottom: 2rem;
   padding: 1.25rem;
-  background: linear-gradient(135deg, rgba(37,99,235,0.03), rgba(30,58,95,0.02));
+  background: var(--pg-surface);
   border: 1px dashed var(--pg-border);
   border-radius: 1rem;
 }
@@ -1265,23 +1157,26 @@
 }
 .pg-field-action:hover { color: var(--pg-text); }
 
-/* --- Hint / Alert Body ---------------------------------------------------- */
+/* --- Hint ----------------------------------------------------------------- */
 .pg-hint { font-size: 0.75rem; color: var(--pg-text-3); line-height: 1.4; margin-top: 0.25rem; }
-.pg-alert__body { font-size: 0.8125rem; line-height: 1.5; color: var(--pg-text-2); }
 
 /* --- Modal System --------------------------------------------------------- */
 .pg-modal {
   position: fixed; inset: 0; z-index: 50;
-  background: rgba(15, 23, 42, 0.45); backdrop-filter: blur(4px);
+  background: rgba(5, 3, 3, 0.85); backdrop-filter: blur(4px);
   display: grid; place-items: center; padding: 1rem;
 }
 .pg-modal__card { position: relative; width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto; }
-.pg-modal__close { position: absolute; top: 0.75rem; right: 0.75rem; z-index: 1; }
+.pg-modal__close {
+  position: absolute; top: 0.75rem; right: 0.75rem; z-index: 1;
+  color: var(--pg-text-3); transition: color 0.15s;
+}
+.pg-modal__close:hover { color: var(--pg-text); }
 
 /* --- Auth Card ------------------------------------------------------------ */
 .pg-authcard {
   background: var(--pg-surface); border-radius: var(--radius);
-  padding: 2rem 1.75rem 1.5rem; box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
+  padding: 2rem 1.75rem 1.5rem; box-shadow: var(--pg-shadow-lg);
   border: 1px solid var(--pg-border);
 }
 .pg-authcard__foot {
@@ -1319,9 +1214,10 @@
 .pg-segment {
   display: inline-flex; background: var(--pg-bg-2);
   border-radius: 0.625rem; padding: 0.25rem; gap: 0.125rem;
+  width: 100%;
 }
 .pg-segment__tab {
-  padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.8125rem;
+  flex: 1; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.8125rem;
   font-weight: 500; color: var(--pg-text-3); cursor: pointer;
   transition: all 0.15s; border: none; background: transparent;
 }
@@ -1329,7 +1225,8 @@
 .pg-segment__tab[aria-selected="true"],
 .pg-segment__tab--active {
   background: var(--pg-surface); color: var(--pg-text);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  box-shadow: var(--pg-shadow-sm);
+  border: 1px solid var(--pg-border);
 }
 
 /* --- Finding Cards -------------------------------------------------------- */
@@ -1338,10 +1235,17 @@
 .pg-finding__desc { font-size: 0.8125rem; color: var(--pg-text-2); line-height: 1.5; margin-bottom: 0.5rem; }
 
 /* --- Verdict Block -------------------------------------------------------- */
+.pg-verdict {
+  padding: 24px;
+  border-left-width: 4px;
+  border-left-color: var(--tone-mark);
+}
 .pg-verdict__head { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.75rem; }
 .pg-verdict__mark {
   width: 3rem; height: 3rem; border-radius: 0.75rem;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: var(--pg-surface-2);
+  border: 1px solid var(--pg-border);
 }
 .pg-verdict__title { font-size: 1.125rem; font-weight: 700; color: var(--pg-text); }
 .pg-verdict__body { color: var(--pg-text-2); font-size: 0.875rem; line-height: 1.6; }
@@ -1356,9 +1260,9 @@
   padding: 0.375rem 0.75rem; border-radius: 0.5rem;
   font-size: 0.8125rem; font-weight: 500; color: var(--pg-text-2);
   cursor: pointer; border: none; background: transparent;
-  transition: color 0.15s, background 0.15s;
+  transition: all 0.15s;
 }
-.pg-backbtn:hover { color: var(--pg-text); background: var(--pg-bg-2); }
+.pg-backbtn:hover { color: var(--pg-text); background: var(--pg-surface-2); }
 .pg-backbtn__label { display: none; }
 @media (min-width: 640px) { .pg-backbtn__label { display: inline; } }
 
@@ -1370,26 +1274,21 @@
 
 /* --- Load Bar ------------------------------------------------------------- */
 .pg-loadbar {
-  height: 3px; background: var(--pg-border); border-radius: 2px; overflow: hidden; position: relative;
-}
-.pg-loadbar::after {
-  content: ""; position: absolute; inset: 0; width: 40%;
-  background: linear-gradient(90deg, var(--pg-accent), var(--pg-signal));
-  animation: pg-loadbar-slide 1.2s ease-in-out infinite; border-radius: 2px;
-}
-@keyframes pg-loadbar-slide {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(350%); }
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 14px; background: var(--pg-surface-2);
+  border: 1px solid var(--pg-border); border-radius: var(--pg-r-sm);
+  font-size: 13px; color: var(--pg-text-2); margin-bottom: 1.5rem;
 }
 
 /* --- Skeleton Line -------------------------------------------------------- */
+.pg-skel-panel {
+  padding: 20px;
+}
 .pg-skel-line {
-  height: 0.75rem; background: var(--pg-bg-2); border-radius: 0.25rem;
+  height: 0.75rem; background: var(--pg-surface-2); border-radius: 0.25rem;
   animation: pg-shimmer 1.5s ease-in-out infinite;
 }
 .pg-skel-line + .pg-skel-line { margin-top: 0.5rem; }
-.pg-skel-line:nth-child(even) { width: 86%; }
-.pg-skel-line:nth-child(3) { width: 72%; }
 
 /* --- Button sizing extensions --------------------------------------------- */
 .pg-btn--xl { padding: 0.875rem 1.5rem; font-size: 0.9375rem; }
@@ -1405,16 +1304,11 @@
 .pg-btn--google {
   background: var(--pg-surface); border: 1px solid var(--pg-border); color: var(--pg-text);
 }
-.pg-btn--google:hover { background: var(--pg-bg-2); border-color: var(--pg-border-2); }
+.pg-btn--google:hover { background: var(--pg-surface-2); border-color: var(--pg-accent); }
 
 /* --- Composer primary variant --------------------------------------------- */
 .pg-composer--primary {
   border-color: var(--pg-accent); border-width: 1.5px;
-  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
-}
-.pg-composer--primary:focus-within {
-  border-color: var(--pg-accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 /* --- Composer flag -------------------------------------------------------- */
@@ -1422,23 +1316,4 @@
   display: inline-flex; align-items: center; gap: 0.375rem;
   font-size: 0.6875rem; font-weight: 600; text-transform: uppercase;
   letter-spacing: 0.04em; color: var(--pg-accent);
-}
-
-/* --- Composer status (character count etc.) ------------------------------- */
-.pg-composer__status {
-  padding: 0.5rem 1rem; font-size: 0.8125rem; color: var(--pg-text-3);
-  border-top: 1px solid var(--pg-border); background: var(--pg-surface-2);
-  border-radius: 0 0 var(--radius) var(--radius);
-  display: flex; align-items: center; gap: 0.5rem;
-}
-
-/* Google AI-style rotating gradient border */
-@keyframes glow-spin {
-  from { --angle: 0deg; }
-  to   { --angle: 360deg; }
-}
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
 }
