@@ -135,7 +135,7 @@ function scanIcon(scan) {
 }
 
 /* ------------------------------------------------------------------ *
- * Brand mark — RaptorLabs Crimson Shield
+ * Brand mark — Precision Lens Optical Shield
  * ------------------------------------------------------------------ */
 
 function GuardMark({ className = "w-8 h-8" }) {
@@ -147,17 +147,17 @@ function GuardMark({ className = "w-8 h-8" }) {
     <svg viewBox="0 0 48 48" className={className} role="img" aria-label="PromptGuard">
       <defs>
         <linearGradient id={`${uid}-hull`} x1="24" y1="4" x2="24" y2="45" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#A20F10" />
-          <stop offset="0.55" stopColor="#302C2D" />
-          <stop offset="1" stopColor="#150F10" />
+          <stop offset="0" stopColor="#3730A3" />
+          <stop offset="0.55" stopColor="#4F46E5" />
+          <stop offset="1" stopColor="#7C3AED" />
         </linearGradient>
         <linearGradient id={`${uid}-edge`} x1="24" y1="3" x2="24" y2="45" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#D63B3B" />
-          <stop offset="1" stopColor="#A20F10" />
+          <stop offset="0" stopColor="#818CF8" />
+          <stop offset="1" stopColor="#3730A3" />
         </linearGradient>
         <radialGradient id={`${uid}-glow`} cx="24" cy="12" r="20" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#D63B3B" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#A20F10" stopOpacity="0" />
+          <stop offset="0" stopColor="#7C3AED" stopOpacity="0.3" />
+          <stop offset="1" stopColor="#3730A3" stopOpacity="0" />
         </radialGradient>
         <clipPath id={`${uid}-clip`}>
           <path d={hull} />
@@ -176,10 +176,10 @@ function GuardMark({ className = "w-8 h-8" }) {
       <g clipPath={`url(#${uid}-clip)`}>
         <rect x="4" y="0" width="40" height="26" fill={`url(#${uid}-glow)`} />
         {/* the prompt under inspection */}
-        <rect x="15" y="16.2" width="18" height="2.6" rx="1.3" fill="#ffffff" fillOpacity="0.92" />
-        <rect x="15" y="22" width="11.5" height="2.6" rx="1.3" fill="#ffffff" fillOpacity="0.5" />
+        <rect x="15" y="16.2" width="18" height="2.6" rx="1.3" fill="#ffffff" fillOpacity="0.95" />
+        <rect x="15" y="22" width="11.5" height="2.6" rx="1.3" fill="#ffffff" fillOpacity="0.6" />
         {/* the line the scanner flagged */}
-        <rect x="15" y="27.8" width="15" height="2.6" rx="1.3" fill="#D63B3B" />
+        <rect x="15" y="27.8" width="15" height="2.6" rx="1.3" fill="#E11D48" />
       </g>
     </svg>
   );
@@ -368,10 +368,10 @@ function AuthForm({ onLogin, titleId }) {
         <div className="pg-auth__mark">
           <GuardMark className="w-11 h-11" />
         </div>
-        <h1 id={titleId} className="mt-5 text-[22px] font-bold tracking-[-0.03em] text-[#FFFFFF]">
+        <h1 id={titleId} className="mt-5 text-[22px] font-bold tracking-[-0.03em] text-[#0F172A]">
           {isSignUp ? "Create your account" : "Sign in to PromptGuard"}
         </h1>
-        <p className="mt-2 text-[13.5px] leading-relaxed text-[#9E9A9B] max-w-[34ch]">
+        <p className="mt-2 text-[13.5px] leading-relaxed text-[#475569] max-w-[34ch]">
           {isSignUp
             ? "Save every scan to your workspace and pick up where you left off."
             : "Access your saved scans, reports and findings history."}
@@ -819,7 +819,7 @@ function NewScan({ onBack, onCreated }) {
       <main className="pg-shell pg-shell--narrow pg-main">
         <div className="pg-pagehead">
           <span className="pg-eyebrow">
-            <Activity className="w-3.5 h-3.5 text-[#A20F10]" aria-hidden="true" />
+            <Activity className="w-3.5 h-3.5 text-[#3730A3]" aria-hidden="true" />
             Submit for analysis
           </span>
           <h1 className="pg-h1 pg-h1--sub mt-4">New scan</h1>
@@ -847,7 +847,7 @@ function NewScan({ onBack, onCreated }) {
           {/* Prompt */}
           <div className="pg-composer pg-composer--primary">
             <div className="pg-composer__head">
-              <FileText className="w-4 h-4 text-[#A20F10] flex-none" aria-hidden="true" />
+              <FileText className="w-4 h-4 text-[#3730A3] flex-none" aria-hidden="true" />
               <span>Prompt</span>
               <span className="ml-auto pg-composer__flag" data-required="true">
                 <span className="pg-dot" data-tone="brand" aria-hidden="true" />
@@ -887,7 +887,7 @@ function NewScan({ onBack, onCreated }) {
           {/* Model response */}
           <div className="pg-composer">
             <div className="pg-composer__head">
-              <MessageSquare className="w-4 h-4 text-[#9E9A9B] flex-none" aria-hidden="true" />
+              <MessageSquare className="w-4 h-4 text-[#94A3B8] flex-none" aria-hidden="true" />
               <span>Model response</span>
               <span className="ml-auto pg-composer__flag">Optional</span>
             </div>
@@ -978,7 +978,7 @@ function FindingCard({ finding, index }) {
           <div className="pg-code__head">
             <Search className="w-3.5 h-3.5 flex-none" aria-hidden="true" />
             <span>Evidence</span>
-            <span className="ml-auto font-normal text-[#9E9A9B]">Detected in input</span>
+            <span className="ml-auto font-normal text-[#94A3B8]">Detected in input</span>
           </div>
           <pre className="pg-code__body">{finding.evidence}</pre>
         </div>
@@ -1270,7 +1270,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
               <div className="pg-code__head">
                 <FileText className="w-3.5 h-3.5 flex-none" aria-hidden="true" />
                 <span>Prompt</span>
-                <span className="ml-auto font-normal text-[#9E9A9B]">
+                <span className="ml-auto font-normal text-[#94A3B8]">
                   {plural(scan.prompt?.length || 0, "character")}
                 </span>
               </div>
@@ -1282,7 +1282,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
                 <div className="pg-code__head">
                   <MessageSquare className="w-3.5 h-3.5 flex-none" aria-hidden="true" />
                   <span>Model response</span>
-                  <span className="ml-auto font-normal text-[#9E9A9B]">
+                  <span className="ml-auto font-normal text-[#94A3B8]">
                     {plural(scan.response.length, "character")}
                   </span>
                 </div>
@@ -1348,7 +1348,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
             <SectionHead label="Policy coverage" id="pg-checks-head">
               <span className="pg-chip">{plural(CHECKS.length, "check")}</span>
             </SectionHead>
-            <p className="text-[13.5px] leading-relaxed text-[#9E9A9B] mb-5">
+            <p className="text-[13.5px] leading-relaxed text-[#475569] mb-5">
               Every scan runs our full suite of real-time detectors. Below is the policy coverage
               applied to this run.
             </p>
@@ -1392,63 +1392,69 @@ function ScanResults({ scanId, onBack, onNewScan }) {
 }
 
 /* ------------------------------------------------------------------ *
- * Main Router
+ * Main App Router
  * ------------------------------------------------------------------ */
 
 export default function App() {
   const [view, setView] = useState(VIEWS.DASHBOARD);
   const [activeScanId, setActiveScanId] = useState(null);
   const [user, setUser] = useState(null);
-  const [showAuth, setShowAuth] = useState(false);
-  const [authLoading, setAuthLoading] = useState(true);
+  const [authOpen, setAuthOpen] = useState(false);
+  const [initializing, setInitializing] = useState(true);
 
   const authTitleId = useId();
 
-  useEffect(() => {
-    base44.auth
-      .me()
-      .then((u) => {
-        setUser(u);
-        setAuthLoading(false);
-      })
-      .catch(() => {
-        setAuthLoading(false);
-      });
+  const syncUser = useCallback(async () => {
+    try {
+      const me = await base44.auth.me();
+      setUser(me || null);
+    } catch (err) {
+      setUser(null);
+    } finally {
+      setInitializing(false);
+    }
   }, []);
 
-  const handleLogin = async () => {
-    const u = await base44.auth.me();
-    setUser(u);
-    setShowAuth(false);
-  };
+  useEffect(() => {
+    syncUser();
+  }, [syncUser]);
 
   const handleLogout = async () => {
-    await base44.auth.signOut();
-    setUser(null);
-    setView(VIEWS.DASHBOARD);
+    try {
+      await base44.auth.signOut();
+      setUser(null);
+      setView(VIEWS.DASHBOARD);
+    } catch (err) {
+      console.error("Sign out failed:", err);
+    }
   };
 
-  const handleCreated = (id) => {
-    setActiveScanId(id);
+  const handleNewScanCreated = (scanId) => {
+    setActiveScanId(scanId);
     setView(VIEWS.RESULTS);
   };
 
-  const handleViewScan = (id) => {
-    setActiveScanId(id);
+  const handleViewScan = (scanId) => {
+    setActiveScanId(scanId);
     setView(VIEWS.RESULTS);
   };
 
   /* Stable identity so Modal's effect doesn't tear down on every render. */
-  const closeAuth = useCallback(() => setShowAuth(false), []);
+  const closeAuth = useCallback(() => setAuthOpen(false), []);
 
-  if (authLoading) {
+  const handleLogin = useCallback(() => {
+    setAuthOpen(false);
+    syncUser();
+  }, [syncUser]);
+
+  if (initializing) {
     return (
       <div className="pg-app">
         <PremiumAnimatedBackground />
         <div className="min-h-screen grid place-items-center">
-          <div className="grid justify-items-center gap-4">
-            <GuardMark className="w-14 h-14" />
-            <span className="text-[13px] font-medium text-[#9E9A9B] pg-live">Loading…</span>
+          <div className="text-center">
+            <Loader2 className="w-8 h-8 pg-spin text-[#3730A3] mx-auto" aria-hidden="true" />
+            <p className="mt-4 text-sm font-medium text-[#475569]">Initializing Precision Lens…</p>
           </div>
         </div>
       </div>
@@ -1465,12 +1471,12 @@ export default function App() {
           onNewScan={() => setView(VIEWS.NEW_SCAN)}
           onViewScan={handleViewScan}
           onLogout={handleLogout}
-          onLogin={() => setShowAuth(true)}
+          onLogin={() => setAuthOpen(true)}
         />
       )}
 
       {view === VIEWS.NEW_SCAN && (
-        <NewScan onBack={() => setView(VIEWS.DASHBOARD)} onCreated={handleCreated} />
+        <NewScan onBack={() => setView(VIEWS.DASHBOARD)} onCreated={handleNewScanCreated} />
       )}
 
       {view === VIEWS.RESULTS && (
@@ -1481,7 +1487,7 @@ export default function App() {
         />
       )}
 
-      {showAuth && (
+      {authOpen && (
         <Modal onClose={closeAuth} labelledBy={authTitleId}>
           <AuthForm onLogin={handleLogin} titleId={authTitleId} />
         </Modal>
