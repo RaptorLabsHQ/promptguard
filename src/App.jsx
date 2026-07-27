@@ -149,14 +149,14 @@ function GuardMark({ className = "w-8 h-8" }) {
         <linearGradient id={`${uid}-hull`} x1="24" y1="4" x2="24" y2="45" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#3730A3" />
           <stop offset="0.55" stopColor="#4F46E5" />
-          <stop offset="1" stopColor="#7C3AED" />
+          <stop offset="1" stopColor="#818CF8" />
         </linearGradient>
         <linearGradient id={`${uid}-edge`} x1="24" y1="3" x2="24" y2="45" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#818CF8" />
           <stop offset="1" stopColor="#3730A3" />
         </linearGradient>
         <radialGradient id={`${uid}-glow`} cx="24" cy="12" r="20" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#7C3AED" stopOpacity="0.3" />
+          <stop offset="0" stopColor="#818CF8" stopOpacity="0.4" />
           <stop offset="1" stopColor="#3730A3" stopOpacity="0" />
         </radialGradient>
         <clipPath id={`${uid}-clip`}>
@@ -188,7 +188,6 @@ function GuardMark({ className = "w-8 h-8" }) {
 function GoogleMark({ className = "w-[18px] h-[18px]" }) {
   return (
     <svg viewBox="0 0 24 24" className={className} aria-hidden="true" focusable="false">
-      {/* Google brand colors are fixed by their trademark guidelines — not themeable. */}
       <path
         fill="#4285F4"
         d="M23.52 12.27c0-.85-.08-1.67-.22-2.45H12v4.64h6.46a5.52 5.52 0 0 1-2.4 3.62v3h3.88c2.27-2.09 3.58-5.17 3.58-8.81Z"
@@ -277,7 +276,6 @@ function Modal({ onClose, labelledBy, children }) {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    /* move focus into the dialog so keyboard users start inside it */
     const first = cardRef.current?.querySelector(
       'input, button, [href], select, textarea, [tabindex]:not([tabindex="-1"])'
     );
@@ -296,7 +294,6 @@ function Modal({ onClose, labelledBy, children }) {
       aria-modal="true"
       aria-labelledby={labelledBy}
       onMouseDown={(e) => {
-        /* backdrop only — mousedown so a drag that ends outside won't close */
         if (e.target === e.currentTarget) onClose();
       }}
     >
@@ -363,7 +360,6 @@ function AuthForm({ onLogin, titleId }) {
 
   return (
     <div className="pg-authcard">
-      {/* Identity */}
       <div className="flex flex-col items-center text-center">
         <div className="pg-auth__mark">
           <GuardMark className="w-11 h-11" />
@@ -378,7 +374,6 @@ function AuthForm({ onLogin, titleId }) {
         </p>
       </div>
 
-      {/* Sign-in panel */}
       <div className="pg-panel mt-8">
         <div className="p-5 sm:p-6 pb-0">
           <div className="pg-segment" role="tablist" aria-label="Authentication mode">
@@ -829,16 +824,11 @@ function NewScan({ onBack, onCreated }) {
           </p>
         </div>
 
-        {/* Cinematic demo launcher — sits between the heading and the form */}
         <div className="pg-demo-slot">
           <DemoAttackSelector
             samples={SAMPLES}
             onSelectPrompt={(text, meta) => {
               setPrompt(text);
-              if (meta?.done) {
-                // Optional: auto-trigger scan for ultra-fast demo
-                // handleSubmit({ preventDefault: () => {} });
-              }
             }}
           />
         </div>
@@ -1020,7 +1010,7 @@ function ReportSkeleton() {
   );
 }
 
-function ScanResults({ scanId, onBack, onNewScan }) {
+function Results({ scanId, onBack, onNewScan }) {
   const [scan, setScan] = useState(null);
   const [findings, setFindings] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -1033,21 +1023,19 @@ function ScanResults({ scanId, onBack, onNewScan }) {
         Scan.get(scanId).catch(() => null),
         Finding.list({ filter: { scanId }, orderBy: "severity" }),
       ]);
-      
+
       const found = scanData || null;
-      
-      // If scan not found and we have retries left, retry after delay
+
+      /* A scan created a moment ago may not be readable yet — back off and retry
+         instead of declaring it missing. */
       if (!found && retrying < maxRetries) {
         const delay = Math.min(400 * Math.pow(1.5, retrying), 3000);
         setTimeout(() => setRetrying((r) => r + 1), delay);
         return;
       }
-      
+
       setScan(found);
-      const sorted = (findingsData || []).sort(
-        (a, b) => (SEVERITY_ORDER[a.severity] ?? 99) - (SEVERITY_ORDER[b.severity] ?? 99)
-      );
-      setFindings(sorted);
+      setFindings(findingsData || []);
       setLoading(false);
     } catch (err) {
       console.error("Failed to fetch results:", err);
@@ -1060,13 +1048,17 @@ function ScanResults({ scanId, onBack, onNewScan }) {
     }
   }, [scanId, retrying]);
 
-  // Reset retry counter when scanId changes
-  useEffect(() => { setRetrying(0); }, [scanId]);
+  /* Reset the retry counter when the report changes. */
+  useEffect(() => {
+    setRetrying(0);
+  }, [scanId]);
 
   useEffect(() => {
     setLoading(true);
     fetchData();
 
+    /* Realtime: findings stream in as the analyzer writes them, and the scan row
+       flips pending → analyzing → complete. */
     const unsubFindings = Finding.subscribe({ filter: { scanId } }, () => fetchData());
     const unsubScan = Scan.subscribe({ filter: { id: scanId } }, () => fetchData());
 
@@ -1075,6 +1067,14 @@ function ScanResults({ scanId, onBack, onNewScan }) {
       unsubScan();
     };
   }, [scanId, fetchData]);
+
+  const sortedFindings = useMemo(
+    () =>
+      [...findings].sort(
+        (a, b) => (SEVERITY_ORDER[a.severity] ?? 99) - (SEVERITY_ORDER[b.severity] ?? 99)
+      ),
+    [findings]
+  );
 
   const counts = useMemo(
     () =>
@@ -1133,8 +1133,8 @@ function ScanResults({ scanId, onBack, onNewScan }) {
   }
 
   const total = findings.length;
-  const verdictTone =
-    total === 0 ? "clean" : SEVERITY_KEYS.find((k) => counts[k] > 0) || "low";
+  /* Tone follows the worst severity actually present, not the scan row's flag. */
+  const verdictTone = total === 0 ? "clean" : SEVERITY_KEYS.find((k) => counts[k] > 0) || "low";
   const streaming = scan.status === "analyzing";
   const complete = scan.status === "complete";
 
@@ -1199,19 +1199,19 @@ function ScanResults({ scanId, onBack, onNewScan }) {
             aria-label="Scan result"
           >
             <div className="pg-verdict__head">
-              <span className="pg-verdict__mark" style={{ color: "var(--tone-mark)" }}>
+              <div className="pg-verdict__mark">
                 {total === 0 ? (
-                  <ShieldCheck className="w-7 h-7" aria-hidden="true" />
+                  <ShieldCheck className="w-5 h-5 text-[var(--tone-mark)]" aria-hidden="true" />
                 ) : (
-                  <AlertTriangle className="w-7 h-7" aria-hidden="true" />
+                  <AlertTriangle className="w-5 h-5 text-[var(--tone-mark)]" aria-hidden="true" />
                 )}
-              </span>
+              </div>
               <div className="min-w-0">
                 <span className="pg-eyebrow">
                   <span className="pg-dot" data-tone={verdictTone} aria-hidden="true" />
                   {total === 0 ? "Scan clear" : `${plural(total, "finding")} detected`}
                 </span>
-                <h1 className="pg-verdict__title mt-2">
+                <h1 className="pg-verdict__title mt-1.5">
                   {total === 0
                     ? "No security risks detected"
                     : `Flagged with ${verdictTone} severity`}
@@ -1219,21 +1219,28 @@ function ScanResults({ scanId, onBack, onNewScan }) {
               </div>
             </div>
 
-            <p className="pg-verdict__body mt-4">
+            <p className="pg-verdict__body mt-3">
               {total === 0
                 ? "This prompt passed all standard injection, jailbreak, and leakage checks. No active payloads or sensitive data patterns were found."
                 : `We detected ${plural(total, "vulnerability")} in the submitted content. Review the evidence and remediation steps below before using this prompt in production.`}
             </p>
 
-            {/* Severity distribution bar */}
+            {/* Severity distribution */}
             {total > 0 && (
-              <div className="mt-6">
+              <div className="mt-6 pt-5 border-t border-[var(--pg-border)]">
                 <div className="pg-meter" aria-hidden="true">
                   {SEVERITY_KEYS.map((key) => {
                     const count = counts[key] || 0;
                     if (count === 0) return null;
                     const pct = (count / total) * 100;
-                    return <i key={key} data-tone={key} style={{ width: `${pct}%` }} />;
+                    return (
+                      <i
+                        key={key}
+                        data-tone={key}
+                        style={{ width: `${pct}%` }}
+                        title={`${key}: ${count}`}
+                      />
+                    );
                   })}
                 </div>
 
@@ -1259,9 +1266,9 @@ function ScanResults({ scanId, onBack, onNewScan }) {
           </section>
         )}
 
-        {/* ---- Input details ---- */}
+        {/* ---- Submitted content ---- */}
         <section className="pg-block pg-block--lg" aria-labelledby="pg-input-head">
-          <SectionHead label="Submitted content" id="pg-input-head">
+          <SectionHead label="Submitted Content" id="pg-input-head">
             <span className="pg-chip pg-mono">{stamp(scan.created_date)}</span>
           </SectionHead>
 
@@ -1281,7 +1288,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
               <div className="pg-code">
                 <div className="pg-code__head">
                   <MessageSquare className="w-3.5 h-3.5 flex-none" aria-hidden="true" />
-                  <span>Model response</span>
+                  <span>Model Response</span>
                   <span className="ml-auto font-normal text-[#94A3B8]">
                     {plural(scan.response.length, "character")}
                   </span>
@@ -1292,9 +1299,9 @@ function ScanResults({ scanId, onBack, onNewScan }) {
           </div>
         </section>
 
-        {/* ---- Findings list ---- */}
+        {/* ---- Findings ---- */}
         <section className="pg-block pg-block--lg" aria-labelledby="pg-findings-head">
-          <SectionHead label="Analysis findings" id="pg-findings-head">
+          <SectionHead label="Detailed Findings" id="pg-findings-head">
             {streaming ? (
               <span className="pg-chip">
                 <span className="pg-dot pg-live" data-tone="brand" aria-hidden="true" />
@@ -1306,8 +1313,8 @@ function ScanResults({ scanId, onBack, onNewScan }) {
           </SectionHead>
 
           {total > 0 ? (
-            <div className="pg-formstack">
-              {findings.map((finding, idx) => (
+            <div className="flex flex-col gap-[14px] mt-4">
+              {sortedFindings.map((finding, idx) => (
                 <FindingCard key={finding.id} finding={finding} index={idx} />
               ))}
             </div>
@@ -1316,7 +1323,7 @@ function ScanResults({ scanId, onBack, onNewScan }) {
               <span className="pg-empty__ring" data-tone="clean">
                 <ShieldCheck className="w-6 h-6" aria-hidden="true" />
               </span>
-              <p className="pg-empty__title">All checks passed</p>
+              <p className="pg-empty__title">Clean report</p>
               <p className="pg-empty__body">
                 PromptGuard evaluated this prompt against our core security policies. No
                 anomalies were found.
@@ -1335,22 +1342,22 @@ function ScanResults({ scanId, onBack, onNewScan }) {
             </div>
           ) : (
             /* Still streaming — placeholders, not an all-clear. */
-            <div className="pg-log" aria-busy="true" aria-label="Waiting for findings">
+            <div className="pg-log mt-4" aria-busy="true" aria-label="Waiting for findings">
               <div className="pg-skel" />
               <div className="pg-skel" />
             </div>
           )}
         </section>
 
-        {/* ---- Coverage checks — only a finished run can claim a category passed ---- */}
+        {/* ---- Coverage — only a finished run can claim a category passed ---- */}
         {complete && (
           <section className="pg-block pg-block--lg" aria-labelledby="pg-checks-head">
-            <SectionHead label="Policy coverage" id="pg-checks-head">
+            <SectionHead label="Analysis Coverage" id="pg-checks-head">
               <span className="pg-chip">{plural(CHECKS.length, "check")}</span>
             </SectionHead>
-            <p className="text-[13.5px] leading-relaxed text-[#475569] mb-5">
-              Every scan runs our full suite of real-time detectors. Below is the policy coverage
-              applied to this run.
+            <p className="text-[13.5px] leading-relaxed text-[#475569] mt-4 mb-4">
+              Every scan runs our full suite of real-time detectors. Below is the policy
+              coverage applied to this run.
             </p>
 
             <ul className="pg-checks">
@@ -1358,13 +1365,19 @@ function ScanResults({ scanId, onBack, onNewScan }) {
               {Object.entries(CATEGORY_LABELS).map(([key, name]) => {
                 const matched = findings.some((f) => f.category === key);
                 return (
-                  <li
-                    key={key}
-                    className="pg-checks__item"
-                    data-tone={matched ? "critical" : "clean"}
-                  >
-                    <span className="pg-dot mt-1" aria-hidden="true" />
-                    <span>{name}</span>
+                  <li key={key} className="pg-checks__item" data-tone={matched ? "high" : "clean"}>
+                    {matched ? (
+                      <AlertTriangle
+                        className="w-4 h-4 text-[var(--tone-mark)] mt-0.5 flex-none"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <CheckCircle2
+                        className="w-4 h-4 text-[var(--tone-mark)] mt-0.5 flex-none"
+                        aria-hidden="true"
+                      />
+                    )}
+                    <span className="font-medium text-[#0F172A]">{name}</span>
                     <span className="pg-checks__verdict" style={{ color: "var(--tone)" }}>
                       {matched ? "Flagged" : "Passed"}
                     </span>
@@ -1392,14 +1405,14 @@ function ScanResults({ scanId, onBack, onNewScan }) {
 }
 
 /* ------------------------------------------------------------------ *
- * Main App Router
+ * Main App Controller
  * ------------------------------------------------------------------ */
 
 export default function App() {
   const [view, setView] = useState(VIEWS.DASHBOARD);
-  const [activeScanId, setActiveScanId] = useState(null);
+  const [selectedScanId, setSelectedScanId] = useState(null);
   const [user, setUser] = useState(null);
-  const [authOpen, setAuthOpen] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [initializing, setInitializing] = useState(true);
 
   const authTitleId = useId();
@@ -1419,7 +1432,12 @@ export default function App() {
     syncUser();
   }, [syncUser]);
 
-  const handleLogout = async () => {
+  const handleLogin = useCallback(() => {
+    setShowAuth(false);
+    syncUser();
+  }, [syncUser]);
+
+  const handleLogout = useCallback(async () => {
     try {
       await base44.auth.signOut();
       setUser(null);
@@ -1427,25 +1445,12 @@ export default function App() {
     } catch (err) {
       console.error("Sign out failed:", err);
     }
-  };
-
-  const handleNewScanCreated = (scanId) => {
-    setActiveScanId(scanId);
-    setView(VIEWS.RESULTS);
-  };
-
-  const handleViewScan = (scanId) => {
-    setActiveScanId(scanId);
-    setView(VIEWS.RESULTS);
-  };
+  }, []);
 
   /* Stable identity so Modal's effect doesn't tear down on every render. */
-  const closeAuth = useCallback(() => setAuthOpen(false), []);
-
-  const handleLogin = useCallback(() => {
-    setAuthOpen(false);
-    syncUser();
-  }, [syncUser]);
+  const closeAuth = useCallback(() => {
+    setShowAuth(false);
+  }, []);
 
   if (initializing) {
     return (
@@ -1454,7 +1459,7 @@ export default function App() {
         <div className="min-h-screen grid place-items-center">
           <div className="text-center">
             <Loader2 className="w-8 h-8 pg-spin text-[#3730A3] mx-auto" aria-hidden="true" />
-            <p className="mt-4 text-sm font-medium text-[#475569]">Initializing Precision Lens…</p>
+            <p className="mt-4 text-sm font-medium text-[#475569]">Initializing PromptGuard…</p>
           </div>
         </div>
       </div>
@@ -1469,25 +1474,34 @@ export default function App() {
           key={user?.id || "anonymous"}
           user={user}
           onNewScan={() => setView(VIEWS.NEW_SCAN)}
-          onViewScan={handleViewScan}
+          onViewScan={(id) => {
+            setSelectedScanId(id);
+            setView(VIEWS.RESULTS);
+          }}
           onLogout={handleLogout}
-          onLogin={() => setAuthOpen(true)}
+          onLogin={() => setShowAuth(true)}
         />
       )}
 
       {view === VIEWS.NEW_SCAN && (
-        <NewScan onBack={() => setView(VIEWS.DASHBOARD)} onCreated={handleNewScanCreated} />
+        <NewScan
+          onBack={() => setView(VIEWS.DASHBOARD)}
+          onCreated={(id) => {
+            setSelectedScanId(id);
+            setView(VIEWS.RESULTS);
+          }}
+        />
       )}
 
       {view === VIEWS.RESULTS && (
-        <ScanResults
-          scanId={activeScanId}
+        <Results
+          scanId={selectedScanId}
           onBack={() => setView(VIEWS.DASHBOARD)}
           onNewScan={() => setView(VIEWS.NEW_SCAN)}
         />
       )}
 
-      {authOpen && (
+      {showAuth && (
         <Modal onClose={closeAuth} labelledBy={authTitleId}>
           <AuthForm onLogin={handleLogin} titleId={authTitleId} />
         </Modal>
