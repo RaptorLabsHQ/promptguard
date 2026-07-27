@@ -430,20 +430,21 @@ export default function DemoAttackSelector({
             transition={{ type: "spring", stiffness: 300, damping: 24 }}
             className="flex flex-col items-center"
           >
-            <div className="relative">
-              {/* pulsing glow ring */}
-              <motion.span
+            <div className="relative inline-flex items-center justify-center">
+              {/* Google AI-style rotating gradient border */}
+              <motion.div
                 aria-hidden="true"
                 className="absolute inset-0 rounded-full"
-                animate={{
-                  boxShadow: [
-                    "0 0 0 0px rgba(37,99,235,0.45), 0 0 24px 0px rgba(37,99,235,0.30)",
-                    "0 0 0 12px rgba(37,99,235,0.00), 0 0 55px 10px rgba(37,99,235,0.42)",
-                    "0 0 0 0px rgba(37,99,235,0.45), 0 0 24px 0px rgba(37,99,235,0.30)",
-                  ],
+                style={{
+                  background: "conic-gradient(from var(--angle, 0deg), #2563eb, #3b82f6, #60a5fa, #93c5fd, #3b82f6, #2563eb)",
+                  filter: "blur(0.5px)",
+                  padding: "2px",
+                  margin: "-2px",
+                  animation: "glow-spin 3s linear infinite",
                 }}
-                transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               />
+              {/* Inner bg to create the border-gap effect */}
+              <div className="absolute inset-[2px] rounded-full bg-[#1e3a5f]" />
               <motion.button
                 type="button"
                 onClick={() => setStep("cards")}
@@ -454,7 +455,7 @@ export default function DemoAttackSelector({
                   y: { duration: 3.2, repeat: Infinity, ease: "easeInOut" },
                   default: { type: "spring", stiffness: 400, damping: 22 },
                 }}
-                className="relative rounded-full backdrop-blur-xl bg-[#1e3a5f]/90 text-white px-8 py-4 font-semibold shadow-2xl inline-flex items-center gap-2.5 text-[14px] tracking-[-0.01em] border border-white/15"
+                className="relative rounded-full bg-[#1e3a5f] text-white px-8 py-4 font-semibold inline-flex items-center gap-2.5 text-[14px] tracking-[-0.01em]"
               >
                 <Sparkles className="w-[18px] h-[18px]" aria-hidden="true" />
                 TRY A DEMO ATTACK

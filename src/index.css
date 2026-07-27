@@ -1223,3 +1223,14 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* Google AI-style rotating gradient border */
+@keyframes glow-spin {
+  from { --angle: 0deg; }
+  to   { --angle: 360deg; }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}

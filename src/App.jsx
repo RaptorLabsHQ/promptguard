@@ -683,6 +683,18 @@ function NewScan({ onBack, onCreated }) {
           </p>
         </div>
 
+        {/* Cinematic Demo Launcher — immediately visible at top */}
+        <DemoAttackSelector
+          samples={SAMPLES}
+          onSelectPrompt={(text, meta) => {
+            setPrompt(text);
+            if (meta?.done) {
+              // Optional: auto-trigger scan for ultra-fast demo
+              // handleSubmit({ preventDefault: () => {} });
+            }
+          }}
+        />
+
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Prompt */}
           <div className="pg-composer">
@@ -763,18 +775,6 @@ function NewScan({ onBack, onCreated }) {
             )}
           </Button>
         </form>
-
-        {/* Cinematic Demo Launcher — self-driving attack selector */}
-        <DemoAttackSelector
-          samples={SAMPLES}
-          onSelectPrompt={(text, meta) => {
-            setPrompt(text);
-            if (meta?.done) {
-              // Optional: auto-trigger scan for ultra-fast demo
-              // handleSubmit({ preventDefault: () => {} });
-            }
-          }}
-        />
       </main>
     </div>
   );
