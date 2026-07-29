@@ -172,42 +172,29 @@
   --tone-line: var(--pg-border);
 }
 
-/* --- App shell ----------------------------------------------------------- */
+/* --- App shell: static Firecrawl-inspired paper grid -------------------- */
 .pg-app {
   position: relative;
   min-height: 100vh;
-  background-color: var(--pg-bg);
+  background: #fafaf9;
   isolation: isolate;
 }
-
-/* Luminary Glass Atmospheric Background Depth System */
-.pg-app::before {
-  content: '';
+.pg-app::before,
+.pg-app::after { content: none; }
+.pg-fire-grid {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
+  background-color: #fafaf9;
   background-image:
-    /* Layer 2: Atmosphere (Radial glow from center-top) */
-    radial-gradient(100% 60% at 50% 0%, rgba(79, 70, 229, 0.03) 0%, rgba(79, 70, 229, 0) 80%),
-    /* Layer 4: Lens elements (Ambient light circles) */
-    radial-gradient(circle at 20% 30%, rgba(79, 70, 229, 0.02) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(129, 140, 248, 0.02) 0%, transparent 40%),
-    /* Layer 3: Engineering Grid */
-    linear-gradient(to right, rgba(203, 213, 225, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(203, 213, 225, 0.08) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 72px 72px, 72px 72px;
+    linear-gradient(to right, rgba(29, 29, 29, .055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 29, 29, .055) 1px, transparent 1px);
+  background-size: 101px 101px;
+  opacity: .72;
 }
-
-/* Layer 1: Base Noise Texture */
-.pg-app::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  opacity: 0.003;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+@media (max-width: 640px) {
+  .pg-fire-grid { background-size: 72px 72px; opacity: .6; }
 }
 
 .pg-shell {
@@ -242,6 +229,8 @@
 
 /* Deliberate breathing room: the header is a control rail, not the hero edge. */
 .pg-main {
+  position: relative;
+  z-index: 1;
   padding-top: clamp(28px, 4vw, 52px);
   padding-bottom: clamp(52px, 7vw, 96px);
 }
@@ -251,7 +240,7 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  background: linear-gradient(90deg, rgba(255,255,255,.96), rgba(249,250,255,.92) 52%, rgba(255,255,255,.96));
+  background: rgba(255,255,255,.94);
   backdrop-filter: blur(18px) saturate(1.2);
   -webkit-backdrop-filter: blur(18px) saturate(1.2);
   border-bottom: 1px solid rgba(203, 213, 225, .72);
@@ -262,7 +251,7 @@
   position: absolute;
   inset: auto 0 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 8%, rgba(79,70,229,.45) 50%, transparent 92%);
+  background: rgba(79,70,229,.42);
 }
 .pg-header__inner {
   display: flex;
@@ -527,10 +516,8 @@
   overflow: hidden;
   border: 1px solid rgba(203, 213, 225, .82);
   border-radius: 16px;
-  background:
-    radial-gradient(68% 115% at 100% 0%, rgba(129, 140, 248, .12), transparent 58%),
-    linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,250,255,.92));
-  box-shadow: 0 24px 60px rgba(15, 23, 42, .075), inset 0 1px 0 rgba(255,255,255,.95);
+  background: rgba(255,255,255,.96);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, .06), inset 0 1px 0 rgba(255,255,255,.95);
 }
 .pg-hero::before {
   content: '';
@@ -544,10 +531,9 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    radial-gradient(60% 100% at 95% 0%, rgba(79, 70, 229, 0.03), transparent 60%),
-    linear-gradient(to right, rgba(15, 23, 42, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.01) 1px, transparent 1px);
-  background-size: 100% 100%, 32px 32px, 32px 32px;
+    linear-gradient(to right, rgba(29,29,29,.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29,29,29,.035) 1px, transparent 1px);
+  background-size: 32px 32px;
 }
 
 .pg-hero__body {
