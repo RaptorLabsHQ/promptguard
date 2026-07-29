@@ -50,8 +50,16 @@ User pastes prompt → Scan entity created → analyzeScan function invoked
 | **Backend Functions** | Deno-based `analyzeScan` orchestrates AI analysis via `asServiceRole` |
 | **AI Integration** | `InvokeLLM` with `response_json_schema` for structured security findings |
 | **Realtime Subscriptions** | `entities.subscribe()` streams findings as they're generated |
-| **Row-Level Security** | Per-user scan isolation when authenticated |
+| **Entity access** | Public anonymous demo access for the competition build; see the production hardening note below |
 | **Site Hosting** | React SPA deployed to Base44 hosting |
+
+## Judge-ready demo
+
+The dashboard exposes a visible **Run demo scan** action before any form. It runs one synthetic prompt-injection fixture through the same Base44 backend function as normal submissions, then opens the real report with evidence and remediation. It is limited to one analysis per browser session; subsequent use reopens that report.
+
+The frontend is native React. The display components in `src/components/promptguard/` render from props only, while Base44 calls remain in `src/App.jsx`. This keeps the production UI reusable in a later Remotion submission-video composition without recording a browser or reproducing product logic.
+
+> **Production hardening:** this competition build intentionally allows anonymous scan creation and public entity reads so judges can test it without an account. Do not send real prompts, credentials, or customer data through this deployment. A commercial release must replace broad entity access with a controlled per-session or authenticated backend boundary, payload limits, rate controls, and retention rules.
 
 ## Quick Start
 

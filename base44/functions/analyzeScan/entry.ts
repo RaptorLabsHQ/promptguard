@@ -51,30 +51,29 @@ const FINDINGS_SCHEMA = {
   required: ["findings", "summary"],
 };
 
-Deno.serve(async (req) => {
+export default async function analyzeScan(req: Request): Promise<Response> {
+  let scanId: string | undefined;
+
   try {
     const base44 = createClientFromRequest(req);
 
-    // Use service role to bypass RLS - we need to write findings
-    // and update scan status regardless of who owns the scan
+    // Use service role to write derived findings and terminal scan status.
     const db = base44.asServiceRole;
 
-    const { scanId } = await req.json();
+    const body = await req.json() as { scanId?: string };
+    scanId = body.scanId;
 
     if (!scanId) {
       return Response.json({ error: "scanId is required" }, { status: 400 });
     }
 
-    // Fetch the scan
-    const scans = await db.entities.Scan.list({
-      filter: { id: scanId },
-    });
+    // Direct lookup avoids filter/index propagation delays on a record that was
+    // just created by the frontend.
+    const scan = await db.entities.Scan.get(scanId).catch(() => null);
 
-    if (!scans || scans.length === 0) {
+    if (!scan) {
       return Response.json({ error: "Scan not found" }, { status: 404 });
     }
-
-    const scan = scans[0];
 
     // Update status to analyzing
     await db.entities.Scan.update(scanId, { status: "analyzing" });
@@ -163,25 +162,24 @@ ${scan.prompt}
       findingCount: findings ? findings.length : 0,
     });
   } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error during analysis";
     console.error("analyzeScan error:", error);
 
-    // Try to update scan status to error if we have a scanId
-    try {
-      const body = await req.clone().json();
-      if (body.scanId) {
+    // Preserve the terminal failure state if parsing or InvokeLLM failed after
+    // the record was identified. The request body may be consumed, so use the
+    // captured ID instead of attempting to read it again.
+    if (scanId) {
+      try {
         const db = createClientFromRequest(req).asServiceRole;
-        await db.entities.Scan.update(body.scanId, {
+        await db.entities.Scan.update(scanId, {
           status: "error",
-          errorMessage: error.message || "Unknown error during analysis",
+          errorMessage: message,
         });
+      } catch (statusError) {
+        console.error("analyzeScan status update failed:", statusError);
       }
-    } catch {
-      // Best effort
     }
 
-    return Response.json(
-      { error: error.message || "Analysis failed" },
-      { status: 500 }
-    );
+    return Response.json({ error: message }, { status: 500 });
   }
-});
+}
