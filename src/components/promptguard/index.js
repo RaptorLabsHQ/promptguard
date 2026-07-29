@@ -28,6 +28,7 @@ export { ScanLog, ScanLogRow } from './ScanLog';
 export { FindingCard } from './FindingCard';
 export { ScanReport } from './ScanReport';
 export { SamplePicker } from './SamplePicker';
+export { WriteUpPage } from './WriteUpPage';
 
 export {
   pad2,

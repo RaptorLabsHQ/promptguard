@@ -42,7 +42,7 @@ Recommended. Record/upload using `docs/DEMO_SCRIPT.md` if there is enough time.
 
 **Project write-up**
 
-https://github.com/RaptorLabsHQ/promptguard/blob/main/docs/WRITEUP.md
+https://promptguard.base44.app/?view=write-up
 
 **Agentic IDE used**
 

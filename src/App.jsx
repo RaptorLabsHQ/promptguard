@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 
 import { base44 } from '@/api/base44Client';
+import '@/writeup.css';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import PremiumAnimatedBackground from '@/PremiumAnimatedBackground';
@@ -40,6 +41,7 @@ import {
   SectionHead,
   SkipLink,
   StatTile,
+  WriteUpPage,
   formatRelative,
   plural,
   shortId,
@@ -59,12 +61,13 @@ import { DEMO_SAMPLE, SAMPLE_PROMPTS } from '@/data/samplePrompts';
 const Scan = base44.entities.Scan;
 const Finding = base44.entities.Finding;
 
-const VIEWS = { DASHBOARD: 'dashboard', NEW_SCAN: 'new-scan', RESULTS: 'results' };
+const VIEWS = { DASHBOARD: 'dashboard', NEW_SCAN: 'new-scan', RESULTS: 'results', WRITE_UP: 'write-up' };
 
 const PAGE_TITLES = {
   [VIEWS.DASHBOARD]: 'PromptGuard — AI Prompt Security Scanner',
   [VIEWS.NEW_SCAN]: 'New scan · PromptGuard',
   [VIEWS.RESULTS]: 'Scan report · PromptGuard',
+  [VIEWS.WRITE_UP]: 'PromptGuard — Project Write-Up',
 };
 
 /* A freshly created record can take a moment to become readable. */
@@ -929,7 +932,11 @@ function Results({ scanId, isDemo, onBack, onNewScan }) {
  * ------------------------------------------------------------------ */
 
 export default function App() {
-  const [view, setView] = useState(VIEWS.DASHBOARD);
+  const [view, setView] = useState(() => (
+    new URLSearchParams(window.location.search).get('view') === VIEWS.WRITE_UP
+      ? VIEWS.WRITE_UP
+      : VIEWS.DASHBOARD
+  ));
   const [selectedScanId, setSelectedScanId] = useState(null);
   const [user, setUser] = useState(null);
   const [initializing, setInitializing] = useState(true);
@@ -1053,6 +1060,8 @@ export default function App() {
   return (
     <MotionConfig reducedMotion="user">
       <SkipLink />
+
+      {view === VIEWS.WRITE_UP && <WriteUpPage />}
 
       {view === VIEWS.DASHBOARD && (
         /* Remount on identity change so the log reflects the session. */
