@@ -140,6 +140,9 @@ promptguard/
 
 [Base44 Dev Build-Off](https://backendcompetition.base44.app/) — July 21–28, 2026.
 
+- [Submission pack](docs/SUBMISSION.md)
+- [2-minute demo script](docs/DEMO_SCRIPT.md)
+
 ## Contact
 
 RaptorLabs — [info@raptorlabs.dev](mailto:info@raptorlabs.dev)
